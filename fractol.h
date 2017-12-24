@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/22 17:31:52 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 16:05:33 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define PROGRAM_NAME "Fracto'l"
 # define W_WIDTH 1200
 # define W_HEIGHT 1200
+
+# ifndef ONE_OVER_LOG2
+#  define ONE_OVER_LOG2 1.0 / log(2.0)
+# endif
 
 # define KEY_W 13
 # define KEY_A 0
@@ -49,14 +53,14 @@ typedef unsigned int	t_uint;
 typedef unsigned long	t_ulong;
 typedef unsigned short	t_ushort;
 
-struct			s_rot;
-struct			s_vertice;
-struct			s_poly;
-struct			s_object;
-struct			s_window;
-struct			s_cam;
-struct			s_env;
-struct			s_img;
+struct s_rot;
+struct s_vertice;
+struct s_poly;
+struct s_object;
+struct s_window;
+struct s_cam;
+struct s_env;
+struct s_img;
 
 typedef struct	s_rot
 {
@@ -113,7 +117,7 @@ typedef struct	s_window
 	double			dx;
 	t_vertice		pivot;
 	struct s_env	*env;
-	struct s_window	*next;	
+	struct s_window	*next;
 }				t_window;
 
 typedef struct	s_cam
@@ -136,7 +140,7 @@ typedef struct	s_thread_stuff
 {
 	t_window	*win;
 	intmax_t	*palette;
-	int			*lim;
+	int			lim[4];
 }				t_thread_stuff;
 
 /*
@@ -177,6 +181,19 @@ void			ft_parse_z_buff(t_env env, t_window *win);
 
 void			ft_mandelfract(t_window *win);
 
-void			ft_draw_mandelfract(t_thread_stuff *t);
+/*
+**		Color_helper.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+t_uchar			ft_get_alpha(intmax_t c);
+
+t_uchar			ft_get_red(intmax_t c);
+
+t_uchar			ft_get_green(intmax_t c);
+
+t_uchar			ft_get_blue(intmax_t c);
+
+intmax_t		ft_g_color(intmax_t c1, intmax_t c2, double k);
 
 #endif

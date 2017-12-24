@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 13:48:24 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/22 16:22:16 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 17:09:38 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void		ft_clear_window(t_window *win)
 	intmax_t	y;
 	int			bytespp;
 
+	mlx_clear_window(win->env->mlx_p, win->win_p);
 	bytespp = win->pixels.bpp / 8;
-	ft_memset(win->pixels.buff, 0, win->height * win->width * bytespp);
+	ft_bzero(win->pixels.buff, win->height * win->width * bytespp);
 	y = -1;
 	while (++y < win->height && (x = -1))
 		while (++x < win->width)
@@ -42,19 +43,20 @@ void		ft_clear_window(t_window *win)
 
 void		ft_fill_image(t_window *win)
 {
-	int			xy[2];
+	int			x;
+	int			y;
 	int			bpp;
 	unsigned	c;
 
 	bpp = win->pixels.bpp / 8;
-	xy[1] = -1;
-	while (++xy[1] < W_HEIGHT && (xy[0] = -1))
-		while (++xy[0] < W_WIDTH)
+	y = -1;
+	while (++y < win->height && (x = -1))
+		while (++x < win->width)
 		{
-			c = (unsigned)win->pixels.z_buff[xy[1]][xy[0]].color;
+			c = win->pixels.z_buff[y][x].color;
 			if (win->pixels.endian)
 				ft_strrev((char *)&c);
-			ft_memcpy(win->pixels.buff + xy[1] * win->pixels.s_l + xy[0] * bpp,
+			ft_memcpy(win->pixels.buff + y * win->pixels.s_l + x * bpp,
 				&c, bpp);
 		}
 }

@@ -6,7 +6,7 @@
 #    By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:05:19 by pgritsen          #+#    #+#              #
-#    Updated: 2017/12/22 16:05:50 by pgritsen         ###   ########.fr        #
+#    Updated: 2017/12/22 19:01:48 by pgritsen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CFLAGS		=	-Wextra -Werror -Wall -O3 -g3
 
 HDRS		=	fractol.h
 
-SRCS		=	main.c handlers.c window_managing.c z_buffer.c mandelbrot_fract.c
+SRCS		=	main.c handlers.c window_managing.c z_buffer.c mandelbrot_fract.c	\
+				color_helper.c
 
 OBJDIR		=	obj
 

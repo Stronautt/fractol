@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:18:42 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/21 12:25:36 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 17:09:39 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ t_window	*ft_new_win(t_env *env, int width, int height, char *title)
 {
 	t_window	*new;
 
-	if (!(new = (t_window *)ft_memalloc(sizeof(t_window))))
-		ft_err_handler("Can't create new window!", title, 0);
+	!(new = (t_window *)ft_memalloc(sizeof(t_window))) ? exit(-1) : 0;
 	if (!env->wins)
 	{
 		if (!(env->wins = (t_window *)ft_memalloc(sizeof(t_window))))
@@ -53,11 +52,11 @@ t_window	*ft_get_win(t_window *wins, const char *title)
 	return (NULL);
 }
 
-int			ft_destroy_win(t_window	*win)
+int			ft_destroy_win(t_window *win)
 {
 	win->next->prev = win->prev;
-	win->prev->next = win->next;	
-	!ft_strcmp(win->title, PROGRAM_NAME) ? exit (0) : 0;
+	win->prev->next = win->next;
+	!ft_strcmp(win->title, PROGRAM_NAME) ? exit(0) : 0;
 	ft_memdel((void **)&win->title);
 	ft_memdel((void **)&win);
 	return (0);
