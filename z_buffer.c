@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 13:48:24 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 17:09:38 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 17:30:03 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,14 @@ void		ft_fill_image(t_window *win)
 
 void		ft_parse_z_buff(t_env env, t_window *win)
 {
+	int		i;
+
 	ft_clear_window(win);
-	ft_mandelfract(win);
+	i = -1;
+	while (env.dpndc[++i].key)
+		if (!ft_strcmp(win->title, env.dpndc[i].key)
+			&& env.dpndc[i].func)
+				env.dpndc[i].func(win);
 	ft_fill_image(win);
 	mlx_put_image_to_window(env.mlx_p, win->win_p, win->pixels.p, 0, 0);
 }

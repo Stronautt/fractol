@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot_fract.c                                 :+:      :+:    :+:   */
+/*   burningship_frac.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 19:07:19 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 19:15:35 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,12 @@ static inline intmax_t	ft_smooth(intmax_t it, intmax_t max_it)
 
 	t = (double)it / (double)max_it;
 	r = 9 * (1 - t) * t * t * t * 255;
-	g = 15 * (1 - t) * (1 - t) * t * t * 255;
-	b = 8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255;
+	g = 4 * (1 - t) * (1 - t) * t * t * 255;
+	b = 1.5 * (1 - t) * (1 - t) * (1 - t) * t * 255;
 	return (r * 0x10000 + g * 0x100 + b);
 }
 
-static inline int		point_in_cardiod(double *xy)
-{
-	double fi;
-	double r;
-	double rc;
-
-	r = sqrt(pow(xy[0] - 0.25, 2) + pow(xy[1], 2));
-	fi = atan2(xy[1], xy[0] - 0.25);
-	rc = 0.5 - 0.5 * cos(fi);
-	if (r <= rc)
-		return (1);
-	return (0);
-}
-
-static void				ft_draw_mandelfract(t_thread_stuff *t)
+static void				ft_draw_burningship(t_thread_stuff *t)
 {
 	int				xy[2];
 	intmax_t		it;
@@ -55,12 +41,10 @@ static void				ft_draw_mandelfract(t_thread_stuff *t)
 		{
 			zxy = (double[3]){0.0, 0.0, 0.0};
 			d[0] = t->win->pivot.x + (xy[0] - t->win->width / 2) * t->win->dx;
-			if (point_in_cardiod(d))
-				continue ;
 			while ((zxy[0] * zxy[0] + zxy[1] * zxy[1]) <= 16.0 && (++it <= 128))
 			{
 				zxy[2] = zxy[0] * zxy[0] - zxy[1] * zxy[1] + d[0];
-				zxy[1] = 2 * zxy[0] * zxy[1] + d[1];
+				zxy[1] = 2 * fabs(zxy[0] * zxy[1]) + d[1];
 				zxy[0] = zxy[2];
 			}
 			t->win->pixels.z_buff[xy[1]][xy[0]].color = ft_smooth(it, 128);
@@ -68,7 +52,7 @@ static void				ft_draw_mandelfract(t_thread_stuff *t)
 	}
 }
 
-void					ft_mandelfract(t_window *win)
+void					ft_burningshipfract(t_window *win)
 {
 	pthread_t		threads[4];
 	t_thread_stuff	s[4];
@@ -83,7 +67,7 @@ void					ft_mandelfract(t_window *win)
 					win->width * i[0] / 2, win->width * (i[0] + 1) / 2}, 16);
 			s[i[0] * 2 + i[1]].win = win;
 			pthread_create(&threads[i[0] * 2 + i[1]], NULL,
-				(void *(*)(void *))ft_draw_mandelfract, &s[i[0] * 2 + i[1]]);
+				(void *(*)(void *))ft_draw_burningship, &s[i[0] * 2 + i[1]]);
 		}
 	i[0] = -1;
 	while (++i[0] < 4)

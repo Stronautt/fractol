@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:21:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 15:50:36 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 19:26:17 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ void	ft_err_handler(char *msg, char *add, int err)
 
 int		ft_key_handler(int key, t_window *win)
 {
-	(void)win;
-	key == KEY_ESC ? exit(0) : 0;
+	char			e;
+
+	e = 0;
+	key == KEY_ESC ? ft_destroy_win(win) : 0;
+	key == KEY_ARR_UP && ++e ? win->pivot.y -= 30 * win->dx : 0;
+	key == KEY_ARR_DOWN && ++e ? win->pivot.y += 30 * win->dx : 0;
+	key == KEY_ARR_RIGHT && ++e ? win->pivot.x += 30 * win->dx : 0;
+	key == KEY_ARR_LEFT && ++e ? win->pivot.x -=  30 * win->dx : 0;	
+	e ? ft_parse_z_buff(*win->env, win) : 0;
 	return (0);
 }
 
@@ -40,12 +47,11 @@ int		ft_mouse_handler(int key, int x, int y, t_window *win)
 	char			e;
 
 	e = 0;
-	key == KEY_ESC && ++e ? exit(0) : 0;
 	if (key == M_SCROLL_UP && ++e)
-		win->dx -= win->dx / 16.0;
-	if (key == M_SCROLL_DOWN && ++e)
-		win->dx += win->dx / 16.0;
-	if (key == M_B_LEFT && ++e)
+		win->dx -= win->dx / 18.0;
+	else if (key == M_SCROLL_DOWN && ++e)
+		win->dx += win->dx / 18.0;
+	else if (key == M_B_LEFT && ++e)
 	{
 		win->pivot.x = win->pivot.x + (x - win->width / 2.0) * win->dx;
 		win->pivot.y = win->pivot.y + (y - win->height / 2.0) * win->dx;

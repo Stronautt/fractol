@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 16:05:33 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 19:13:40 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ typedef struct	s_rot
 	double	ry;
 	double	rz;
 }				t_rot;
+
+typedef struct	s_dpndc
+{
+	char	*key;
+	void	(*func)(void *);
+}				t_dpndc;
 
 typedef struct	s_vertice
 {
@@ -134,12 +140,12 @@ typedef struct	s_env
 	t_object	*objs;
 	void		*mlx_p;
 	t_window	*wins;
+	t_dpndc		*dpndc;
 }				t_env;
 
 typedef struct	s_thread_stuff
 {
 	t_window	*win;
-	intmax_t	*palette;
 	int			lim[4];
 }				t_thread_stuff;
 
@@ -176,11 +182,17 @@ void			ft_parse_z_buff(t_env env, t_window *win);
 
 /*
 **		Mandelbrot_fract.c
-**		↓↓↓↓↓↓↓↓↓↓
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
 void			ft_mandelfract(t_window *win);
 
+/*
+**		Burningship_fract.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+void			ft_burningshipfract(t_window *win);
 /*
 **		Color_helper.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓
