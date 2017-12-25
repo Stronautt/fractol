@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 14:15:35 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/25 18:40:49 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/25 20:14:28 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main()
 	t_vertice string[MEM_SIZE][MEM_SIZE];
 
 	FILE *fp;
-	char fileName[] = "./kernel/hello.cl";
+	char fileName[] = "./kernel/hello.cl.o";
 	char *source_str;
 	size_t source_size;
 	 
@@ -64,8 +64,8 @@ int main()
 	memobj = clCreateBuffer(context, CL_MEM_READ_WRITE, MEM_SIZE * MEM_SIZE * sizeof(t_vertice), NULL, &ret);
 	 
 	/* Create Kernel Program from the source */
-	program = clCreateProgramWithSource(context, 1, (const char **)&source_str,
-	(const size_t *)&source_size, &ret);
+	program = clCreateProgramWithBinary(context, 1, &device_id, (const size_t *)&source_size,
+		(const unsigned char **)&source_str, NULL, &ret);
 	 
 	/* Build Kernel Program */
 	ret = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
@@ -73,12 +73,9 @@ int main()
 		printf("Program didn't compiled!\n");
 	 
 	size_t size = 0;
-	clGetProgramInfo(program, CL_PROGRAM_BINARY_SIZES, 0, &size, NULL);
-	printf("%zu\n", size);
-	unsigned char *binary = malloc(size);
-	clGetProgramInfo(program, CL_PROGRAM_BINARIES, size, binary, NULL);
-	for (size_t i = 0; i < size; i++)
-		printf("%c\n", binary[i]);
+	clGetProgramInfo(program, CL_PROGRAM_BINARY_SIZES, sizeof(size_t), &size, NULL);
+	unsigned char *binary = ft_memalloc(size);
+	clGetProgramInfo(program, CL_PROGRAM_BINARIES, size, &binary, NULL);
 
 	/* Create OpenCL Kernel */
 	kernel = clCreateKernel(program, "hello", &ret);
