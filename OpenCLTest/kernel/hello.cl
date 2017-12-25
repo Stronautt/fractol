@@ -65,6 +65,9 @@ __kernel void hello(__global t_vertice *z_buff, double pivot_x,
 				zxy[0] = zxy[2];
 			}
 			z_buff[xy[1] * height + xy[0]].color = ft_smooth(it, 128);
+			if (z_buff[xy[1] * height + xy[0]].color > 0xFFFFFF
+				|| z_buff[xy[1] * height + xy[0]].color < 0)
+				z_buff[xy[1] * height + xy[0]].color = 0;
 		}
 	}
 }

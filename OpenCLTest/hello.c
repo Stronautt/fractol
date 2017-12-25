@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 14:15:35 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/25 20:14:28 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/25 20:42:46 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include <stdlib.h>
 #include "../fractol.h"
  
-#include <OpenCL/opencl.h>
- 
-#define MEM_SIZE (10)
+#define MEM_SIZE (128)
 #define MAX_SOURCE_SIZE (0x100000)
  
 int main()
@@ -62,7 +60,6 @@ int main()
 	 
 	/* Create Memory Buffer */
 	memobj = clCreateBuffer(context, CL_MEM_READ_WRITE, MEM_SIZE * MEM_SIZE * sizeof(t_vertice), NULL, &ret);
-	 
 	/* Create Kernel Program from the source */
 	program = clCreateProgramWithBinary(context, 1, &device_id, (const size_t *)&source_size,
 		(const unsigned char **)&source_str, NULL, &ret);
@@ -72,11 +69,6 @@ int main()
 	if (ret)
 		printf("Program didn't compiled!\n");
 	 
-	size_t size = 0;
-	clGetProgramInfo(program, CL_PROGRAM_BINARY_SIZES, sizeof(size_t), &size, NULL);
-	unsigned char *binary = ft_memalloc(size);
-	clGetProgramInfo(program, CL_PROGRAM_BINARIES, size, &binary, NULL);
-
 	/* Create OpenCL Kernel */
 	kernel = clCreateKernel(program, "hello", &ret);
 	if (ret)
@@ -101,15 +93,14 @@ int main()
 	if (ret)
 		printf("Execute error!\n");
 	
-	ft_bzero(string, MEM_SIZE * MEM_SIZE * sizeof(t_vertice));
 	/* Copy results from the memory buffer */
 	ret = clEnqueueReadBuffer(command_queue, memobj, CL_TRUE, 0,
-	MEM_SIZE * MEM_SIZE * sizeof(t_vertice), string, 0, NULL, NULL);
+		MEM_SIZE * MEM_SIZE * sizeof(t_vertice), string, 0, NULL, NULL);
 	 
 	/* Display Result */
 	for (int i = 0; i < MEM_SIZE; i++)
 		for (int j = 0; j < MEM_SIZE; j++)
-			ft_printf("%#.6lX\n", labs(string[i][j].color));
+			ft_printf("%#.6lX\n", string[i][j].color);
 	 
 	/* Finalization */
 	ret = clFlush(command_queue);

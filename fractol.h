@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/25 15:38:29 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/25 20:32:18 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <time.h>
 # include <limits.h>
 # include <pthread.h>
+# include <OpenCL/opencl.h>
 # include "libft.h"
 
 # define PROGRAM_NAME "Fracto'l"
@@ -83,7 +84,7 @@ typedef struct	s_vertice
 	double				x;
 	double				y;
 	double				z;
-	intmax_t			color;
+	long				color;
 	struct s_vertice	*next;
 }				t_vertice;
 
