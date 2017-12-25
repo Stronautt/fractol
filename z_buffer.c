@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 13:48:24 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 17:30:03 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/25 14:06:36 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ t_vertice	**ft_init_z_buffer(t_window win)
 	t_vertice	**z_buff;
 	int			y;
 
-	if (!(z_buff = (t_vertice **)malloc(sizeof(t_vertice *) * win.height)))
+	if (!(z_buff = ft_memalloc(sizeof(t_vertice *) * win.height)))
 		ft_err_handler("Z_Buffer alloation fails!", NULL, 0);
 	y = -1;
 	while (++y < win.height)
-		if (!(z_buff[y] = (t_vertice *)malloc(sizeof(t_vertice) * win.width)))
+		if (!(z_buff[y] = ft_memalloc(sizeof(t_vertice) * win.width)))
 			ft_err_handler("Z_Buffer alloation fails!", NULL, 0);
 	return (z_buff);
 }
@@ -61,6 +61,20 @@ void		ft_fill_image(t_window *win)
 		}
 }
 
+void		ft_print_debug(t_env env, t_window *win)
+{
+	char	buff[128];
+
+	if (!win->dx)
+		return ;
+	sprintf(buff, "X:    %a", win->pivot.x);
+	mlx_string_put(env.mlx_p, win->win_p, 10, 10, 0x00FF00, buff);
+	sprintf(buff, "Y:    %a", win->pivot.y);
+	mlx_string_put(env.mlx_p, win->win_p, 10, 30, 0x00FF00, buff);
+	sprintf(buff, "Zoom: %a", win->dx);
+	mlx_string_put(env.mlx_p, win->win_p, 10, 50, 0x00FF00, buff);
+}
+
 void		ft_parse_z_buff(t_env env, t_window *win)
 {
 	int		i;
@@ -70,7 +84,8 @@ void		ft_parse_z_buff(t_env env, t_window *win)
 	while (env.dpndc[++i].key)
 		if (!ft_strcmp(win->title, env.dpndc[i].key)
 			&& env.dpndc[i].func)
-				env.dpndc[i].func(win);
+			env.dpndc[i].func(win);
 	ft_fill_image(win);
 	mlx_put_image_to_window(env.mlx_p, win->win_p, win->pixels.p, 0, 0);
+	ft_print_debug(env, win);
 }

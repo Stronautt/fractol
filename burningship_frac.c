@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 19:15:35 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/25 14:01:52 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void				ft_draw_burningship(t_thread_stuff *t)
 		{
 			zxy = (double[3]){0.0, 0.0, 0.0};
 			d[0] = t->win->pivot.x + (xy[0] - t->win->width / 2) * t->win->dx;
-			while ((zxy[0] * zxy[0] + zxy[1] * zxy[1]) <= 16.0 && (++it <= 128))
+			while ((zxy[0] * zxy[0] + zxy[1] * zxy[1]) <= 16.0 && (++it <= 160))
 			{
 				zxy[2] = zxy[0] * zxy[0] - zxy[1] * zxy[1] + d[0];
 				zxy[1] = 2 * fabs(zxy[0] * zxy[1]) + d[1];
 				zxy[0] = zxy[2];
 			}
-			t->win->pixels.z_buff[xy[1]][xy[0]].color = ft_smooth(it, 128);
+			t->win->pixels.z_buff[xy[1]][xy[0]].color = ft_smooth(it, 160);
 		}
 	}
 }
@@ -62,10 +62,9 @@ void					ft_burningshipfract(t_window *win)
 	while (++i[0] < 2 && (i[1] = -1))
 		while (++i[1] < 2)
 		{
-			ft_memmove(s[i[0] * 2 + i[1]].lim,
-				(int[4]){win->height * i[1] / 2, win->height * (i[1] + 1) / 2,
-					win->width * i[0] / 2, win->width * (i[0] + 1) / 2}, 16);
-			s[i[0] * 2 + i[1]].win = win;
+			s[i[0] * 2 + i[1]] = (t_thread_stuff){win,
+				{win->height * i[1] / 2, win->height * (i[1] + 1) / 2,
+					win->width * i[0] / 2, win->width * (i[0] + 1) / 2}};
 			pthread_create(&threads[i[0] * 2 + i[1]], NULL,
 				(void *(*)(void *))ft_draw_burningship, &s[i[0] * 2 + i[1]]);
 		}

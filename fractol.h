@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 19:13:40 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/24 19:29:19 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "libft.h"
 
 # define PROGRAM_NAME "Fracto'l"
+# define BURNINGSHIP "BurningShip"
+
 # define W_WIDTH 1200
 # define W_HEIGHT 1200
 
