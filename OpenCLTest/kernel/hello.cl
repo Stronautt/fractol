@@ -1,14 +1,6 @@
-typedef struct	s_vertice
-{
-	long		tr;
-	double		x;
-	double		y;
-	double		z;
-	long		color;
-	long		ash;
-}				t_vertice;
+#define MAX_ITERARIONS 255
 
-long	ft_smooth(long it, long max_it)
+static inline unsigned int	ft_smooth(int it, int max_it)
 {
 	double	t;
 	int		r;
@@ -19,55 +11,45 @@ long	ft_smooth(long it, long max_it)
 	r = 9 * (1 - t) * t * t * t * 255;
 	g = 15 * (1 - t) * (1 - t) * t * t * 255;
 	b = 8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255;
-	return (r * 0x10000 + g * 0x100 + b);
+	return (abs(r * 0x10000 + g * 0x100 + b));
 }
 
-static inline int		point_in_cardiod(double *xy)
+static inline int	point_in_cardiod(double x, double y)
 {
 	double fi;
 	double r;
 	double rc;
 
-	r = sqrt(pow(xy[0] - 0.25, 2) + pow(xy[1], 2));
-	fi = atan2(xy[1], xy[0] - 0.25);
+	r = sqrt(pow(x - 0.25, 2) + pow(y, 2));
+	fi = atan2(y, x - 0.25);
 	rc = 0.5 - 0.5 * cos(fi);
 	if (r <= rc)
 		return (1);
 	return (0);
 }
 
-__kernel void hello(__global t_vertice *z_buff, double pivot_x,
-					double pivot_y, double dx, int height, int width)
+__kernel void
+fill_mandelfract(__global unsigned int *z_buff, double pivot_x,
+				double pivot_y, double dx, int height, int width)
 {
-	int		xy[2];
-	long	it;
-	double	d[2];
-	double	zxy[3];
-	double	fi;
-	double	r;
-	double	rc;
+	int		it = 0;
+	int		x = get_global_id(0);
+	int		y = get_global_id(1);
+	float3	z = (float3) 0;
+	float2	c;
 
-	xy[1] = -1;
-	while (++xy[1] < height && (xy[0] = -1))
+	c = (float2)(pivot_x + (x - width / 2) * dx,
+		pivot_y + (y - height / 2) * dx);
+	if (!point_in_cardiod(c.x, c.y))
 	{
-		d[1] = pivot_y + (xy[1] - height / 2) * dx;
-		while (++xy[0] < width && (it = -1))
+		while ((z.x * z.x + z.y * z.y) <= 4.0 && (++it <= MAX_ITERARIONS))
 		{
-			zxy[0] = 0;
-			zxy[1] = 0;
-			d[0] = pivot_x + (xy[0] - width / 2) * dx;
-			if (point_in_cardiod(d))
-				continue ;
-			while ((zxy[0] * zxy[0] + zxy[1] * zxy[1]) <= 4.0 && (++it <= 128))
-			{
-				zxy[2] = zxy[0] * zxy[0] - zxy[1] * zxy[1] + d[0];
-				zxy[1] = 2 * zxy[0] * zxy[1] + d[1];
-				zxy[0] = zxy[2];
-			}
-			z_buff[xy[1] * height + xy[0]].color = ft_smooth(it, 128);
-			if (z_buff[xy[1] * height + xy[0]].color > 0xFFFFFF
-				|| z_buff[xy[1] * height + xy[0]].color < 0)
-				z_buff[xy[1] * height + xy[0]].color = 0;
+			z.z = z.x * z.x - z.y * z.y + c.x;
+			z.y = 2.0 * z.x * z.y + c.y;
+			z.x = z.z;
 		}
+		z_buff[y * width + x] = ft_smooth(it, MAX_ITERARIONS);
 	}
+	else
+		z_buff[y * width + x] = 0x000000;
 }

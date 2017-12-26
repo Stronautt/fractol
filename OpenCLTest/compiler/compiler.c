@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 14:15:35 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/25 20:13:50 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/26 14:53:44 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ int		main(int ac, char **av)
 		program = clCreateProgramWithSource(context, 1, (const char **)&source_str,
 			(const size_t *)&source_size, &ret);
 		free(source_str);		
-		ret = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
+		ret = clBuildProgram(program, 1, &device_id, "-g", NULL, NULL);
 		if (ret)
 		{
-			printf("%s : Kernel didn't compiled!\n", file_name);
+			char	err_log[65536];
+			clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG, sizeof(err_log), err_log, NULL);
+			printf("%s : Kernel didn't compiled!\nLog:\n%s\n\n", file_name, err_log);
 			continue ;
 		}
 		clGetProgramInfo(program, CL_PROGRAM_BINARY_SIZES, sizeof(size_t), &source_size, NULL);
