@@ -1,4 +1,4 @@
-#define MAX_ITERARIONS 255
+#define MAX_ITERATIONS 255
 
 static inline unsigned int	ft_smooth(int it, int max_it)
 {
@@ -42,13 +42,13 @@ fill_mandelfract(__global unsigned int *z_buff, double pivot_x,
 		pivot_y + (y - height / 2) * dx);
 	if (!point_in_cardiod(c.x, c.y))
 	{
-		while ((z.x * z.x + z.y * z.y) <= 4.0 && (++it <= MAX_ITERARIONS))
+		while ((z.x * z.x + z.y * z.y) <= 4.0 && (++it <= MAX_ITERATIONS))
 		{
 			z.z = z.x * z.x - z.y * z.y + c.x;
 			z.y = 2.0 * z.x * z.y + c.y;
 			z.x = z.z;
 		}
-		z_buff[y * width + x] = ft_smooth(it, MAX_ITERARIONS);
+		z_buff[y * width + x] = ft_smooth(it, MAX_ITERATIONS);
 	}
 	else
 		z_buff[y * width + x] = 0x000000;
