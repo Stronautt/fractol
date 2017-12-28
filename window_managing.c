@@ -6,11 +6,30 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:18:42 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/24 19:26:03 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:21:39 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static void	init_data(t_env *env, t_window *w)
+{
+	int		i;
+
+	w->win_p = mlx_new_window(env->mlx_p, w->width, w->height, w->title);
+	w->pixels.p = mlx_new_image(env->mlx_p, w->width, w->height);
+	w->pixels.buff = mlx_get_data_addr(w->pixels.p, &w->pixels.bpp,
+		&w->pixels.s_l, &w->pixels.endian);
+	w->cl_data.mem = clCreateBuffer(env->cl_data.context, CL_MEM_READ_WRITE,
+				w->width * w->height * (w->pixels.bpp / 8), NULL, NULL);
+	i = -1;
+	while (env->dpndc[++i].func)
+		if (!ft_strcmp(w->title, env->dpndc[i].key))
+			break ;
+	if (env->dpndc[i].func && env->dpndc[i].kernel_name)
+		ft_parse_kernel(env, w,
+			env->dpndc[i].kernel_name, env->dpndc[i].func_name);
+}
 
 t_window	*ft_new_win(t_env *env, int width, int height, char *title)
 {
@@ -27,18 +46,13 @@ t_window	*ft_new_win(t_env *env, int width, int height, char *title)
 	new->width = width;
 	new->height = height;
 	new->title = ft_strdup(title);
-	new->win_p = mlx_new_window(env->mlx_p, width, height, title);
-	new->pixels.z_buff = ft_init_z_buffer(*new);
-	new->pixels.p = mlx_new_image(env->mlx_p, width, height);
-	new->pixels.buff = mlx_get_data_addr(new->pixels.p, &new->pixels.bpp,
-		&new->pixels.s_l, &new->pixels.endian);
 	env->wins->next->prev = new;
 	new->next = env->wins->next;
 	new->prev = env->wins;
-	env->wins->next = new;
 	new->env = env;
+	init_data(env, new);
 	mlx_hook(new->win_p, 17, 0, &ft_destroy_win, new);
-	return (new);
+	return (env->wins->next = new);
 }
 
 t_window	*ft_get_win(t_window *wins, const char *title)

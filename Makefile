@@ -6,7 +6,7 @@
 #    By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:05:19 by pgritsen          #+#    #+#              #
-#    Updated: 2017/12/25 13:06:45 by pgritsen         ###   ########.fr        #
+#    Updated: 2017/12/28 14:16:11 by pgritsen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ CFLAGS		=	-Wextra -Werror -Wall -O3 -g3
 
 HDRS		=	fractol.h
 
-SRCS		=	main.c handlers.c window_managing.c z_buffer.c mandelbrot_fract.c	\
-				color_helper.c burningship_frac.c
+SRCS		=	main.c handlers.c window_managing.c draw.c mandelbrot_fract.c	\
+				color_helper.c burningship_frac.c opencl.c
 
 OBJDIR		=	obj
 
@@ -28,7 +28,7 @@ OBJ			=	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 LIBS		=	libft/libft.a minilibx_macos/libmlx.a
 
 INCLUDES	=	-Ilibft -Iminilibx_macos -Llibft -Lminilibx_macos -lft -lmlx	\
-				-framework OpenGL -framework AppKit
+				-framework OpenGL -framework AppKit -framework OpenCl
 
 all: lib $(NAME)
 

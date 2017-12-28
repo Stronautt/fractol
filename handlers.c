@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:21:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/25 14:01:37 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/28 14:19:25 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_key_handler(int key, t_window *win)
 	key == KEY_ARR_DOWN && ++e ? win->pivot.y += 30 * win->dx : 0;
 	key == KEY_ARR_RIGHT && ++e ? win->pivot.x += 30 * win->dx : 0;
 	key == KEY_ARR_LEFT && ++e ? win->pivot.x -= 30 * win->dx : 0;
-	e ? ft_parse_z_buff(*win->env, win) : 0;
+	e ? ft_draw(*win->env, win) : 0;
 	return (0);
 }
 
@@ -56,6 +56,6 @@ int		ft_mouse_handler(int key, int x, int y, t_window *win)
 		win->pivot.x = win->pivot.x + (x - win->width / 2.0) * win->dx;
 		win->pivot.y = win->pivot.y + (y - win->height / 2.0) * win->dx;
 	}
-	e ? ft_parse_z_buff(*win->env, win) : 0;
+	e ? ft_draw(*win->env, win) : 0;
 	return (0);
 }

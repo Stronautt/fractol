@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/25 20:32:18 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:40:50 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,19 @@
 # include "libft.h"
 
 # define PROGRAM_NAME "Fracto'l"
+# define MANDELFRACT "Mandelbrot Set"
 # define BURNINGSHIP "BurningShip"
 
-# define W_WIDTH 1200
-# define W_HEIGHT 1200
+# define K_MF "./kernel/mandelfract.cl"
+# define F_MF "fill_mandelfract"
+
+# define K_BS "./kernel/burningship.cl"
+# define F_BS "fill_burningship"
+
+# define MAX_SOURCE_SIZE 0x400000
+
+# define W_WIDTH 2560
+# define W_HEIGHT 1440
 
 # ifndef ONE_OVER_LOG2
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
@@ -65,6 +74,16 @@ struct s_cam;
 struct s_env;
 struct s_img;
 
+typedef struct	s_cl
+{
+	cl_device_id		device;
+	cl_context			context;
+	cl_command_queue	queue;
+	cl_program			program;
+	cl_kernel			kernel;
+	cl_mem				mem;
+}				t_cl;
+
 typedef struct	s_rot
 {
 	double	rx;
@@ -76,6 +95,8 @@ typedef struct	s_dpndc
 {
 	char	*key;
 	void	(*func)(void *);
+	char	*func_name;
+	char	*kernel_name;
 }				t_dpndc;
 
 typedef struct	s_vertice
@@ -112,7 +133,6 @@ typedef struct	s_img
 	int			bpp;
 	void		*p;
 	char		*buff;
-	t_vertice	**z_buff;
 }				t_img;
 
 typedef struct	s_window
@@ -126,6 +146,7 @@ typedef struct	s_window
 	double			dx;
 	t_vertice		pivot;
 	struct s_env	*env;
+	t_cl			cl_data;
 	struct s_window	*next;
 }				t_window;
 
@@ -144,6 +165,7 @@ typedef struct	s_env
 	void		*mlx_p;
 	t_window	*wins;
 	t_dpndc		*dpndc;
+	t_cl		cl_data;
 }				t_env;
 
 typedef struct	s_thread_stuff
@@ -175,18 +197,18 @@ t_window		*ft_get_win(t_window *wins, const char *title);
 int				ft_destroy_win(t_window *win);
 
 /*
-**		Z_buffer.c
-**		↓↓↓↓↓↓↓↓↓↓
+**		Draw.c
+**		↓↓↓↓↓↓
 */
 
-t_vertice		**ft_init_z_buffer(t_window win);
-
-void			ft_parse_z_buff(t_env env, t_window *win);
+void			ft_draw(t_env env, t_window *win);
 
 /*
 **		Mandelbrot_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
+
+void			ft_init_mandelfract(t_window *win);
 
 void			ft_mandelfract(t_window *win);
 
@@ -195,7 +217,10 @@ void			ft_mandelfract(t_window *win);
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
+void			ft_init_buringship(t_window *win);
+
 void			ft_burningshipfract(t_window *win);
+
 /*
 **		Color_helper.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -210,5 +235,15 @@ t_uchar			ft_get_green(intmax_t c);
 t_uchar			ft_get_blue(intmax_t c);
 
 intmax_t		ft_g_color(intmax_t c1, intmax_t c2, double k);
+
+/*
+**		OpenCl.c
+**		↓↓↓↓↓↓↓↓
+*/
+
+void			ft_init_cl(t_env *env, cl_device_type dev_type);
+
+void			ft_parse_kernel(t_env *env, t_window *win,
+						const char *kernel_name, const char *func_name);
 
 #endif
