@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:21:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:58:18 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 20:00:37 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_err_handler(char *msg, char *add, int err)
 int		ft_menu_mouse_handler(int key, int x, int y, t_window *win)
 {
 	t_window		*fract;
-	int				i;	
+	int				i;
 
 	fract = NULL;
 	if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 290 && y <= 353

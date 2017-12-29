@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:46:02 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:55:49 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 20:00:27 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_make_draw_dependencies(t_env *env)
 	!(env->dpndc = malloc(sizeof(dpndc))) ? ft_err_handler("Memmory fail!",
 															NULL, 0) : 0;
 	!(env->init_table = malloc(sizeof(init_table))) ?
-								ft_err_handler("Memmory fail!",	NULL, 0) : 0;
+								ft_err_handler("Memmory fail!", NULL, 0) : 0;
 	ft_memmove(env->dpndc, dpndc, sizeof(dpndc));
 	ft_memmove(env->init_table, init_table, sizeof(init_table));
 }
