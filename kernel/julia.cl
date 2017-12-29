@@ -29,8 +29,8 @@ static inline unsigned int	ft_smooth(int it, int max_it)
 }
 
 __kernel void
-fill_julia(__global int *buff, double pivot_x,
-				double pivot_y, double dx, int height, int width)
+fill_julia(__global int *buff, double pivot_x, double pivot_y, double dx,
+			double cx, double cy, int height, int width)
 {
 	int				it = 0;
 	int				x = get_global_id(0);
@@ -42,8 +42,8 @@ fill_julia(__global int *buff, double pivot_x,
 	it = MAX_ITERATIONS + 1;
 	while ((z.x * z.x + z.y * z.y) <= 4.0 && --it > 1)
 	{
-		z.z = z.x * z.x - z.y * z.y - 0.7;
-		z.y = 2 * z.x * z.y + 0.27015;
+		z.z = z.x * z.x - z.y * z.y + cx;
+		z.y = 2 * z.x * z.y + cy;
 		z.x = z.z;
 	}
 	buff[y * width + x] = ft_smooth(it, MAX_ITERATIONS);

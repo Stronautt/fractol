@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:45:05 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 17:40:08 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:36:54 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_init_julia(t_window *win)
 	win->pivot.x = 0.0;
 	win->pivot.y = 0.0;
 	win->dx = 1.0;
+	win->c.x = -0.7;
+	win->c.y = 0.27015;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
 	mlx_mouse_hook(win->win_p, &ft_mouse_jf_handler, win);
 }
@@ -33,9 +35,13 @@ void	ft_julia(t_window *win)
 		(void *)&win->pivot.y)) ? ft_err_handler("OpenCL", "Fail!", 0) : 0;
 	(err = clSetKernelArg(win->cl_data.kernel, 3, sizeof(double),
 		(void *)&win->dx)) ? ft_err_handler("OpenCL", "Fail!", 0) : 0;
-	(err = clSetKernelArg(win->cl_data.kernel, 4, sizeof(int),
+	(err = clSetKernelArg(win->cl_data.kernel, 4, sizeof(double),
+		(void *)&win->c.x)) ? ft_err_handler("OpenCL", "Fail!", 0) : 0;
+	(err = clSetKernelArg(win->cl_data.kernel, 5, sizeof(double),
+		(void *)&win->c.y)) ? ft_err_handler("OpenCL", "Fail!", 0) : 0;
+	(err = clSetKernelArg(win->cl_data.kernel, 6, sizeof(int),
 		(void *)&win->height)) ? ft_err_handler("OpenCL", "Fail!", 0) : 0;
-	(err = clSetKernelArg(win->cl_data.kernel, 5, sizeof(int),
+	(err = clSetKernelArg(win->cl_data.kernel, 7, sizeof(int),
 		(void *)&win->width)) ? ft_err_handler("OpenCL", "Fail!", 0) : 0;
 	err = clEnqueueNDRangeKernel(win->env->cl_data.queue, win->cl_data.kernel,
 		2, NULL, (size_t[3]){win->width, win->height, 0}, NULL, 0, NULL, NULL);

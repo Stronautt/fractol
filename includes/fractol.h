@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 17:40:11 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:38:27 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct	s_window
 	void			*win_p;
 	t_img			pixels;
 	double			dx;
+	t_vertice		c;
 	t_vertice		pivot;
 	struct s_env	*env;
 	t_cl			cl_data;
