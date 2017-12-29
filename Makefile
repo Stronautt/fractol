@@ -6,7 +6,7 @@
 #    By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:05:19 by pgritsen          #+#    #+#              #
-#    Updated: 2017/12/28 14:16:11 by pgritsen         ###   ########.fr        #
+#    Updated: 2017/12/29 14:08:25 by pgritsen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,14 @@ CC			=	gcc
 
 CFLAGS		=	-Wextra -Werror -Wall -O3 -g3
 
-HDRS		=	fractol.h
+HDRSDIR		=	includes
+
+HDRS		=	$(addprefix $(HDRSDIR)/, fractol.h)
+
+SRCSDIR		=	source
 
 SRCS		=	main.c handlers.c window_managing.c draw.c mandelbrot_fract.c	\
-				color_helper.c burningship_frac.c opencl.c
+				burningship_frac.c opencl.c usage.c
 
 OBJDIR		=	obj
 
@@ -42,9 +46,9 @@ $(OBJDIR):
 	@mkdir $(OBJDIR)
 	@printf "\033[32m[DONE]\033[0m\n"
 
-$(OBJ): $(OBJDIR)/%.o : %.c
+$(OBJ): $(OBJDIR)/%.o : $(SRCSDIR)/%.c
 	@printf "\033[32m[Compiling $<].......\033[0m"
-	@$(CC) $(CFLAGS) -Ilibft -Iminilibx_macos -c $< -o $@
+	@$(CC) $(CFLAGS) -Ilibft -Iminilibx_macos -c $< -o $@ -I$(HDRSDIR)
 	@printf "\033[32m[DONE]\033[0m\n"
 
 $(LIBS): lib

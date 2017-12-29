@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/28 16:40:50 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 14:07:57 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define MAX_SOURCE_SIZE 0x400000
 
 # define W_WIDTH 2560
-# define W_HEIGHT 1440
+# define W_HEIGHT 1310
 
 # ifndef ONE_OVER_LOG2
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
@@ -245,5 +245,12 @@ void			ft_init_cl(t_env *env, cl_device_type dev_type);
 
 void			ft_parse_kernel(t_env *env, t_window *win,
 						const char *kernel_name, const char *func_name);
+
+/*
+**		Usage.c
+**		↓↓↓↓↓↓↓
+*/
+
+double			ft_lerp(double a, double b, double t);
 
 #endif

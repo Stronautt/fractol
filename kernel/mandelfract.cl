@@ -1,6 +1,6 @@
 #pragma OPENCL EXTENSION cl_khr_fp64 : enable
 
-#define MAX_ITERATIONS 255
+#define MAX_ITERATIONS 128
 
 static inline unsigned int	ft_smooth(int it, int max_it)
 {

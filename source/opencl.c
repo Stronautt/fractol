@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 21:20:01 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/28 15:14:13 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/28 18:28:53 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_parse_kernel(t_env *env, t_window *win,
 	obj_size = read(fd, obj_content, MAX_SOURCE_SIZE);
 	win->cl_data.program = clCreateProgramWithSource(env->cl_data.context, 1,
 		(const char **)&obj_content, (const size_t *)&obj_size, &er);
+	ft_memdel((void **)&obj_content);
 	er ? ft_err_handler("OpenCl", "Can't create program!", 0) : 0;
 	er = clBuildProgram(win->cl_data.program, 1, &env->cl_data.device,
 						NULL, NULL, NULL);

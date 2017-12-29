@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot_fract.c                                 :+:      :+:    :+:   */
+/*   burningship_frac.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/28 16:43:34 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/28 21:34:00 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void					ft_init_mandelfract(t_window *win)
+void	ft_init_buringship(t_window *win)
 {
 	win->pivot.x = -0.75;
 	win->pivot.y = 0.0;
@@ -21,7 +21,7 @@ void					ft_init_mandelfract(t_window *win)
 	mlx_mouse_hook(win->win_p, &ft_mouse_handler, win);
 }
 
-void					ft_mandelfract(t_window *win)
+void	ft_burningshipfract(t_window *win)
 {
 	cl_int	err;
 
