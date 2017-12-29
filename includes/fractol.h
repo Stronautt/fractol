@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:22:32 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:54:06 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MANDELFRACT "Mandelbrot Set"
 # define BURNINGSHIP "BurningShip"
 # define JULIAFRACT "Julia Set"
+# define TRICORNFRACT "Tricorn Set"
 
 # define K_MF "./kernel/mandelfract.cl"
 # define F_MF "fill_mandelfract"
@@ -38,6 +39,9 @@
 
 # define K_JF "./kernel/julia.cl"
 # define F_JF "fill_julia"
+
+# define K_TF "./kernel/tricorn.cl"
+# define F_TF "fill_tricorn"
 
 # define MAX_SOURCE_SIZE 0x400000
 
@@ -101,7 +105,7 @@ typedef struct	s_rot
 typedef struct	s_dpndc
 {
 	char	*key;
-	void	(*func)(void *);
+	void	(*func)(struct s_window *);
 	char	*func_name;
 	char	*kernel_name;
 }				t_dpndc;
@@ -173,6 +177,7 @@ typedef struct	s_env
 	void		*mlx_p;
 	t_window	*wins;
 	t_dpndc		*dpndc;
+	t_dpndc		*init_table;
 	t_cl		cl_data;
 }				t_env;
 
@@ -250,6 +255,15 @@ void			ft_burningshipfract(t_window *win);
 void			ft_init_julia(t_window *win);
 
 void			ft_julia(t_window *win);
+
+/*
+**		Tricorn_fract.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+void			ft_init_tricornfract(t_window *win);
+
+void			ft_tricornfract(t_window *win);
 
 /*
 **		Color_helper.c

@@ -6,7 +6,7 @@
 #    By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:05:19 by pgritsen          #+#    #+#              #
-#    Updated: 2017/12/29 16:47:34 by pgritsen         ###   ########.fr        #
+#    Updated: 2017/12/29 19:41:30 by pgritsen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ HDRS		=	$(addprefix $(HDRSDIR)/, fractol.h)
 SRCSDIR		=	source
 
 SRCS		=	main.c handlers.c window_managing.c draw.c mandelbrot_fract.c	\
-				burningship_frac.c opencl.c usage.c menu.c julia_fract.c
+				burningship_frac.c opencl.c usage.c menu.c julia_fract.c		\
+				tricorn_fract.c
 
 OBJDIR		=	obj
 

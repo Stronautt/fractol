@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:24:03 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 16:42:09 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:57:27 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_menu(t_window *win)
 	!button || !logo ? ft_err_handler("Can't find resource!", NULL, 0) : 0;
 	mlx_put_image_to_window(win->env->mlx_p, win->win_p, logo, 50, 50);
 	mlx_string_put(win->env->mlx_p, win->win_p, 635, 225, 0, "By pgritsen");
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 40, 290);
+	mlx_string_put(win->env->mlx_p, win->win_p, 130, 308, 0, "Tricorn Set");
 	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 40, 360);
 	mlx_string_put(win->env->mlx_p, win->win_p, 115, 378, 0, "Mandelbrot Set");
 	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 40, 430);

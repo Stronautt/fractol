@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:21:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 18:38:15 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:58:18 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,26 @@ void	ft_err_handler(char *msg, char *add, int err)
 
 int		ft_menu_mouse_handler(int key, int x, int y, t_window *win)
 {
-	t_window	*fract;
+	t_window		*fract;
+	int				i;	
 
 	fract = NULL;
-	if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 360 && y <= 423
+	if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 290 && y <= 353
+		&& !ft_get_win(win->env->wins, TRICORNFRACT))
+		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, TRICORNFRACT);
+	else if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 360 && y <= 423
 		&& !ft_get_win(win->env->wins, MANDELFRACT))
-	{
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, MANDELFRACT);
-		ft_init_mandelfract(fract);
-	}
-	if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 430 && y <= 493
+	else if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 430 && y <= 493
 		&& !ft_get_win(win->env->wins, BURNINGSHIP))
-	{
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, BURNINGSHIP);
-		ft_init_buringship(fract);
-	}
-	if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 500 && y <= 563
+	else if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 500 && y <= 563
 		&& !ft_get_win(win->env->wins, JULIAFRACT))
-	{
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, JULIAFRACT);
-		ft_init_julia(fract);
-	}
+	i = -1;
+	while (fract && win->env->init_table[++i].func)
+		if (!ft_strcmp(fract->title, win->env->init_table[i].key))
+			win->env->init_table[i].func(fract);
 	fract ? ft_draw(*win->env, fract) : 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:46:02 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 18:42:27 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:55:49 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,25 @@
 void	ft_make_draw_dependencies(t_env *env)
 {
 	const t_dpndc	dpndc[] = {
-		{PROGRAM_NAME, (void (*)(void *))&ft_menu, NULL, NULL},
-		{MANDELFRACT, (void (*)(void *))&ft_mandelfract, F_MF, K_MF},
-		{BURNINGSHIP, (void (*)(void *))&ft_burningshipfract, F_BS, K_BS},
-		{JULIAFRACT, (void (*)(void *))&ft_julia, F_JF, K_JF},
-		{NULL, NULL, NULL, NULL}
-	};
+		{PROGRAM_NAME, &ft_menu, NULL, NULL},
+		{MANDELFRACT, &ft_mandelfract, F_MF, K_MF},
+		{BURNINGSHIP, &ft_burningshipfract, F_BS, K_BS},
+		{JULIAFRACT, &ft_julia, F_JF, K_JF},
+		{TRICORNFRACT, &ft_tricornfract, F_TF, K_TF},
+		{NULL, NULL, NULL, NULL}};
+	const t_dpndc	init_table[] = {
+		{MANDELFRACT, &ft_init_mandelfract, NULL, NULL},
+		{BURNINGSHIP, &ft_init_buringship, NULL, NULL},
+		{JULIAFRACT, &ft_init_julia, NULL, NULL},
+		{TRICORNFRACT, &ft_init_tricornfract, NULL, NULL},
+		{NULL, NULL, NULL, NULL}};
 
 	!(env->dpndc = malloc(sizeof(dpndc))) ? ft_err_handler("Memmory fail!",
 															NULL, 0) : 0;
+	!(env->init_table = malloc(sizeof(init_table))) ?
+								ft_err_handler("Memmory fail!",	NULL, 0) : 0;
 	ft_memmove(env->dpndc, dpndc, sizeof(dpndc));
+	ft_memmove(env->init_table, init_table, sizeof(init_table));
 }
 
 void	ft_make_environment(t_env *env)
