@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:18:42 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/28 16:21:39 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 19:27:55 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int			ft_destroy_win(t_window *win)
 	win->prev->next = win->next;
 	!ft_strcmp(win->title, PROGRAM_NAME) ? exit(0) : 0;
 	mlx_destroy_window(win->env->mlx_p, win->win_p);
+	mlx_destroy_image(win->env->mlx_p, win->pixels.p);
+	clReleaseMemObject(win->cl_data.mem);
+	clReleaseProgram(win->cl_data.program);
+	clReleaseKernel(win->cl_data.kernel);
 	ft_memdel((void **)&win->title);
 	ft_memdel((void **)&win);
 	return (0);
