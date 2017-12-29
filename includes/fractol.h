@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 14:07:57 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 17:40:11 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define PROGRAM_NAME "Fracto'l"
 # define MANDELFRACT "Mandelbrot Set"
 # define BURNINGSHIP "BurningShip"
+# define JULIAFRACT "Julia Set"
 
 # define K_MF "./kernel/mandelfract.cl"
 # define F_MF "fill_mandelfract"
@@ -35,10 +36,16 @@
 # define K_BS "./kernel/burningship.cl"
 # define F_BS "fill_burningship"
 
+# define K_JF "./kernel/julia.cl"
+# define F_JF "fill_julia"
+
 # define MAX_SOURCE_SIZE 0x400000
 
-# define W_WIDTH 2560
-# define W_HEIGHT 1310
+# define MW_WIDTH 800
+# define MW_HEIGHT 600
+
+# define FW_WIDTH 2560
+# define FW_HEIGHT 1310
 
 # ifndef ONE_OVER_LOG2
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
@@ -183,7 +190,11 @@ void			ft_err_handler(char *msg, char *add, int err);
 
 int				ft_key_handler(int key, t_window *win);
 
-int				ft_mouse_handler(int key, int x, int y, t_window *win);
+int				ft_menu_mouse_handler(int key, int x, int y, t_window *win);
+
+int				ft_mouse_jf_handler(int key, int x, int y, t_window *win);
+
+int				ft_mouse_bsmf_handler(int key, int x, int y, t_window *win);
 
 /*
 **		Window_managing.c
@@ -201,7 +212,16 @@ int				ft_destroy_win(t_window *win);
 **		↓↓↓↓↓↓
 */
 
+void			ft_set_background(t_window *win, t_uint color);
+
 void			ft_draw(t_env env, t_window *win);
+
+/*
+**		Menu.c
+**		↓↓↓↓↓↓
+*/
+
+void			ft_menu(t_window *win);
 
 /*
 **		Mandelbrot_fract.c
@@ -220,6 +240,15 @@ void			ft_mandelfract(t_window *win);
 void			ft_init_buringship(t_window *win);
 
 void			ft_burningshipfract(t_window *win);
+
+/*
+**		Julia_fract.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+void			ft_init_julia(t_window *win);
+
+void			ft_julia(t_window *win);
 
 /*
 **		Color_helper.c

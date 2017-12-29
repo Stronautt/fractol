@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/28 21:34:00 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 17:15:22 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_init_buringship(t_window *win)
 	win->pivot.y = 0.0;
 	win->dx = 0.003;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
-	mlx_mouse_hook(win->win_p, &ft_mouse_handler, win);
+	mlx_mouse_hook(win->win_p, &ft_mouse_bsmf_handler, win);
 }
 
 void	ft_burningshipfract(t_window *win)

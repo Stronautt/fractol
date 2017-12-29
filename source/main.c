@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/18 22:01:23 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/28 18:45:28 by pgritsen         ###   ########.fr       */
+/*   Created: 2017/12/29 14:46:02 by pgritsen          #+#    #+#             */
+/*   Updated: 2017/12/29 16:48:12 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	ft_make_draw_dependencies(t_env *env)
 {
 	const t_dpndc	dpndc[] = {
+		{PROGRAM_NAME, (void (*)(void *))&ft_menu, NULL, NULL},
 		{MANDELFRACT, (void (*)(void *))&ft_mandelfract, F_MF, K_MF},
 		{BURNINGSHIP, (void (*)(void *))&ft_burningshipfract, F_BS, K_BS},
+		{JULIAFRACT, (void (*)(void *))&ft_julia, F_JF, K_JF},
 		{NULL, NULL, NULL, NULL}
 	};
 
@@ -31,8 +33,10 @@ void	ft_make_environment(t_env *env)
 
 	env->mlx_p = mlx_init();
 	ft_init_cl(env, CL_DEVICE_TYPE_GPU);
-	main = ft_new_win(env, W_WIDTH, W_HEIGHT, PROGRAM_NAME);
+	main = ft_new_win(env, MW_WIDTH, MW_HEIGHT, PROGRAM_NAME);
+	ft_draw(*env, main);
 	mlx_hook(main->win_p, 2, 0, &ft_key_handler, main);
+	mlx_mouse_hook(main->win_p, &ft_menu_mouse_handler, main);
 }
 
 int		main(void)
@@ -41,12 +45,6 @@ int		main(void)
 
 	ft_make_draw_dependencies(&env);
 	ft_make_environment(&env);
-	ft_new_win(&env, W_WIDTH, W_HEIGHT, MANDELFRACT);
-	ft_new_win(&env, W_WIDTH, W_HEIGHT, BURNINGSHIP);
-	ft_init_mandelfract(ft_get_win(env.wins, MANDELFRACT));
-	ft_init_buringship(ft_get_win(env.wins, BURNINGSHIP));
-	ft_draw(env, ft_get_win(env.wins, MANDELFRACT));
-	ft_draw(env, ft_get_win(env.wins, BURNINGSHIP));
 	mlx_loop(env.mlx_p);
 	return (0);
 }

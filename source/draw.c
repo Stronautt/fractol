@@ -6,11 +6,22 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:12:26 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/28 16:20:03 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/29 15:59:03 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void		ft_set_background(t_window *win, t_uint color)
+{
+	int		i;
+	long	limit;
+
+	limit = win->width * win->height * 4;
+	i = -4;
+	while ((i += 4) < limit)
+		ft_memcpy(&win->pixels.buff[i], &color, 4);
+}
 
 void		ft_print_debug(t_env env, t_window *win)
 {
@@ -36,7 +47,11 @@ void		ft_draw(t_env env, t_window *win)
 	while (env.dpndc[++i].key)
 		if (!ft_strcmp(win->title, env.dpndc[i].key)
 			&& env.dpndc[i].func)
+		{
 			env.dpndc[i].func(win);
-	mlx_put_image_to_window(env.mlx_p, win->win_p, win->pixels.p, 0, 0);
+			break ;
+		}
+	if (env.dpndc[i].kernel_name)
+		mlx_put_image_to_window(env.mlx_p, win->win_p, win->pixels.p, 0, 0);
 	ft_print_debug(env, win);
 }

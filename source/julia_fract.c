@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot_fract.c                                 :+:      :+:    :+:   */
+/*   julia_fract.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 17:15:24 by pgritsen         ###   ########.fr       */
+/*   Created: 2017/12/29 16:45:05 by pgritsen          #+#    #+#             */
+/*   Updated: 2017/12/29 17:40:08 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_init_mandelfract(t_window *win)
+void	ft_init_julia(t_window *win)
 {
-	win->pivot.x = -0.75;
+	win->pivot.x = 0.0;
 	win->pivot.y = 0.0;
-	win->dx = 0.003;
+	win->dx = 1.0;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
-	mlx_mouse_hook(win->win_p, &ft_mouse_bsmf_handler, win);
+	mlx_mouse_hook(win->win_p, &ft_mouse_jf_handler, win);
 }
 
-void	ft_mandelfract(t_window *win)
+void	ft_julia(t_window *win)
 {
 	cl_int	err;
 
