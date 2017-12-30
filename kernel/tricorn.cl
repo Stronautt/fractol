@@ -22,9 +22,9 @@ static inline unsigned int	ft_smooth(int it, int max_it)
 	int		b;
 
 	t = (double)it / (double)max_it;
-	r = 9 * (1 - t) * t * t * t * 255;
-	g = 15 * (1 - t) * (1 - t) * t * t * 255;
-	b = 8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255;
+	r = 8 * (1 - t) * t * t * t * 255;
+	g = 16 * (1 - t) * (1 - t) * t * t * 255;
+	b = 2.5 * (1 - t) * (1 - t) * (1 - t) * t * 255;
 	return (r * 0x10000 + g * 0x100 + b);
 }
 

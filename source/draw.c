@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:12:26 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 11:06:25 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 11:51:08 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_print_debug(t_env env, t_window *win)
 {
 	char	buff[128];
 
-	if (!win->dx)
+	if (!ft_strcmp(win->title, PROGRAM_NAME))
 		return ;
 	sprintf(buff, "X:    %a", win->pivot.x);
 	mlx_string_put(env.mlx_p, win->win_p, 10, 10, 0x00FF00, buff);
@@ -35,6 +35,12 @@ void		ft_print_debug(t_env env, t_window *win)
 	mlx_string_put(env.mlx_p, win->win_p, 10, 30, 0x00FF00, buff);
 	sprintf(buff, "Zoom: %a", win->dx);
 	mlx_string_put(env.mlx_p, win->win_p, 10, 50, 0x00FF00, buff);
+	if (ft_strcmp(win->title, JULIAFRACT))
+		return ;
+	sprintf(buff, "CX:   %a", win->c.x);
+	mlx_string_put(env.mlx_p, win->win_p, 10, 70, 0x00FF00, buff);
+	sprintf(buff, "CY:   %a", win->c.y);
+	mlx_string_put(env.mlx_p, win->win_p, 10, 90, 0x00FF00, buff);
 }
 
 int			ft_draw(t_env env, t_window *win)

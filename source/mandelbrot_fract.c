@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:16:42 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 12:57:39 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_init_mandelfract(t_window *win)
 	win->pivot.y = 0.0;
 	win->dx = 0.003;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
-	mlx_mouse_hook(win->win_p, &ft_mouse_bsmf_handler, win);
+	mlx_mouse_hook(win->win_p, &ft_mouse_handler, win);
 }
 
 void	ft_mandelfract(t_window *win)

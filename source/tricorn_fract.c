@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 19:41:20 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:59:01 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 12:57:50 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_init_tricornfract(t_window *win)
 	win->pivot.y = 0.0;
 	win->dx = 0.003;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
-	mlx_mouse_hook(win->win_p, &ft_mouse_bsmf_handler, win);
+	mlx_mouse_hook(win->win_p, &ft_mouse_handler, win);
 }
 
 void	ft_tricornfract(t_window *win)

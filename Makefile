@@ -6,7 +6,7 @@
 #    By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:05:19 by pgritsen          #+#    #+#              #
-#    Updated: 2017/12/29 20:10:10 by pgritsen         ###   ########.fr        #
+#    Updated: 2017/12/30 13:09:08 by pgritsen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCSDIR		=	source
 
 SRCS		=	main.c handlers.c window_managing.c draw.c mandelbrot_fract.c	\
 				burningship_frac.c opencl.c usage.c menu.c julia_fract.c		\
-				tricorn_fract.c
+				tricorn_fract.c handlers_2.c
 
 OBJDIR		=	obj
 

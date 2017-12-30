@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:45:05 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 18:36:54 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 13:08:12 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_init_julia(t_window *win)
 	win->c.y = 0.27015;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
 	mlx_mouse_hook(win->win_p, &ft_mouse_jf_handler, win);
+	mlx_hook(win->win_p, 6, 0, &ft_mouse_move_handler, win);
 }
 
 void	ft_julia(t_window *win)

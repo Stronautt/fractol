@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 11:14:08 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 13:07:29 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define MW_WIDTH 800
 # define MW_HEIGHT 600
 
-# define FW_WIDTH 600
-# define FW_HEIGHT 600
+# define FW_WIDTH 2560
+# define FW_HEIGHT 1440
 
 # ifndef ONE_OVER_LOG2
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
@@ -160,6 +160,7 @@ typedef struct	s_window
 	struct s_env	*env;
 	t_cl			cl_data;
 	char			safe_m;
+	char			intra_m;
 	struct s_window	*next;
 }				t_window;
 
@@ -199,9 +200,16 @@ int				ft_key_handler(int key, t_window *win);
 
 int				ft_menu_mouse_handler(int key, int x, int y, t_window *win);
 
+int				ft_mouse_handler(int key, int x, int y, t_window *win);
+
 int				ft_mouse_jf_handler(int key, int x, int y, t_window *win);
 
-int				ft_mouse_bsmf_handler(int key, int x, int y, t_window *win);
+/*
+**		Handlers_2.c
+**		↓↓↓↓↓↓↓↓↓↓
+*/
+
+int				ft_mouse_move_handler(int x, int y, t_window *win);
 
 /*
 **		Window_managing.c
