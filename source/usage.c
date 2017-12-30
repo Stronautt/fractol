@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 18:46:54 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 14:30:10 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 16:25:31 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		ft_make_help_dependecies(t_env *env)
 		{BURNINGSHIP, &ft_burninghelp, NULL, NULL},
 		{JULIAFRACT, &ft_juliahelp, NULL, NULL},
 		{TRICORNFRACT, &ft_tricornhelp, NULL, NULL},
+		{FERNFRACT, &ft_fernhelp, NULL, NULL},
 		{NULL, NULL, NULL, NULL}};
 
 	!(env->help_table = malloc(sizeof(help_table))) ?
@@ -64,16 +65,18 @@ void		ft_make_draw_dependencies(t_env *env)
 		{BURNINGSHIP, &ft_burningshipfract, F_BS, K_BS},
 		{JULIAFRACT, &ft_julia, F_JF, K_JF},
 		{TRICORNFRACT, &ft_tricornfract, F_TF, K_TF},
+		{FERNFRACT, &ft_fernfract, NULL, NULL},
 		{NULL, NULL, NULL, NULL}};
 	const t_dpndc	init_table[] = {
 		{MANDELFRACT, &ft_init_mandelfract, NULL, NULL},
 		{BURNINGSHIP, &ft_init_buringship, NULL, NULL},
 		{JULIAFRACT, &ft_init_julia, NULL, NULL},
 		{TRICORNFRACT, &ft_init_tricornfract, NULL, NULL},
+		{FERNFRACT, &ft_init_fernfract, NULL, NULL},
 		{NULL, NULL, NULL, NULL}};
 
-	!(env->dpndc = malloc(sizeof(dpndc))) ? ft_err_handler("Memmory fail!",
-															NULL, 0) : 0;
+	!(env->dpndc = malloc(sizeof(dpndc))) ?
+								ft_err_handler("Memmory fail!",	NULL, 0) : 0;
 	!(env->init_table = malloc(sizeof(init_table))) ?
 								ft_err_handler("Memmory fail!", NULL, 0) : 0;
 	ft_memmove(env->dpndc, dpndc, sizeof(dpndc));

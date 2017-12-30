@@ -6,13 +6,31 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:24:03 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 14:28:41 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 16:45:09 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_menu(t_window *win)
+static inline void	right_buttons(t_window *win, void *button)
+{
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 50, 290);
+	mlx_string_put(win->env->mlx_p, win->win_p, 140, 308, 0, "Tricorn Set");
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 50, 360);
+	mlx_string_put(win->env->mlx_p, win->win_p, 125, 378, 0, "Mandelbrot Set");
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 50, 430);
+	mlx_string_put(win->env->mlx_p, win->win_p, 140, 448, 0, "BurningShip");
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 50, 500);
+	mlx_string_put(win->env->mlx_p, win->win_p, 150, 518, 0, "Julia Set");
+}
+
+static inline void	left_buttons(t_window *win, void *button)
+{
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 450, 290);
+	mlx_string_put(win->env->mlx_p, win->win_p, 540, 308, 0, "BarnsleyFern");
+}
+
+void				ft_menu(t_window *win)
 {
 	int		t;
 	void	*button;
@@ -26,12 +44,6 @@ void	ft_menu(t_window *win)
 	mlx_put_image_to_window(win->env->mlx_p, win->win_p, logo, 50, 50);
 	mlx_string_put(win->env->mlx_p, win->win_p, 635, 225, 0, "By pgritsen");
 	mlx_string_put(win->env->mlx_p, win->win_p, 50, 570, 0, "HELP: TAB");
-	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 40, 290);
-	mlx_string_put(win->env->mlx_p, win->win_p, 130, 308, 0, "Tricorn Set");
-	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 40, 360);
-	mlx_string_put(win->env->mlx_p, win->win_p, 115, 378, 0, "Mandelbrot Set");
-	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 40, 430);
-	mlx_string_put(win->env->mlx_p, win->win_p, 130, 448, 0, "BurningShip");
-	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 40, 500);
-	mlx_string_put(win->env->mlx_p, win->win_p, 140, 518, 0, "Julia Set");
+	right_buttons(win, button);
+	left_buttons(win, button);
 }

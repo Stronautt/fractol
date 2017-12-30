@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:12:26 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 14:16:24 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 16:59:04 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			ft_draw(t_env env, t_window *win)
 			env.dpndc[i].func(win);
 			break ;
 		}
-	if (env.dpndc[i].kernel_name)
+	if (ft_strcmp(win->title, PROGRAM_NAME))
 		mlx_put_image_to_window(env.mlx_p, win->win_p, win->pixels.p, 0, 0);
 	ft_print_debug(env, win);
 	return (0);

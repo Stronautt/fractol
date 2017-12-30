@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:45:05 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 14:47:24 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 16:03:07 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ void	ft_juliahelp(t_window *win)
 					0, "- You can activate interactive mode, controls: ");
 	mlx_string_put(win->env->mlx_p, win->win_p, 40, 265,
 					0x8C, "PRESS 'Q' to activate, and again to deactivate.");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 305, 0x8C, "ESC");
+	mlx_string_put(win->env->mlx_p, win->win_p, 60, 305, 0, "- to close.");
 }
 
 void	ft_init_julia(t_window *win)
 {
 	win->pivot.x = 0.0;
-	win->pivot.y = 0.0;
-	win->dx = 1.0;
+	win->pivot.y = 0.1;
+	win->dx = 0.85;
 	win->c.x = -0.7;
 	win->c.y = 0.27015;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);

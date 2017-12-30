@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 14:37:54 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 15:40:35 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_mandelhelp(t_window *win)
 					0, "- You can move this set, controls: ");
 	mlx_string_put(win->env->mlx_p, win->win_p, 40, 235,
 					0x8C, "ARROW KEYS");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 275, 0x8C, "ESC");
+	mlx_string_put(win->env->mlx_p, win->win_p, 60, 275, 0, "- to close.");
 }
 
 void	ft_init_mandelfract(t_window *win)

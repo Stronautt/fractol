@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:21:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 14:48:00 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 16:29:36 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,21 @@ int		ft_menu_mouse_handler(int key, int x, int y, t_window *win)
 	int				i;
 
 	fract = NULL;
-	if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 290 && y <= 353
+	if (key == M_B_LEFT && x >= 50 && x <= 350 && y >= 290 && y <= 353
 		&& !ft_get_win(win->env->wins, TRICORNFRACT))
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, TRICORNFRACT);
-	else if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 360 && y <= 423
+	else if (key == M_B_LEFT && x >= 50 && x <= 350 && y >= 360 && y <= 423
 		&& !ft_get_win(win->env->wins, MANDELFRACT))
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, MANDELFRACT);
-	else if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 430 && y <= 493
+	else if (key == M_B_LEFT && x >= 50 && x <= 350 && y >= 430 && y <= 493
 		&& !ft_get_win(win->env->wins, BURNINGSHIP))
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, BURNINGSHIP);
-	else if (key == M_B_LEFT && x >= 40 && x <= 340 && y >= 500 && y <= 563
+	else if (key == M_B_LEFT && x >= 50 && x <= 350 && y >= 500 && y <= 563
 		&& !ft_get_win(win->env->wins, JULIAFRACT))
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, JULIAFRACT);
+	else if (key == M_B_LEFT && x >= 450 && x <= 750 && y >= 290 && y <= 353
+		&& !ft_get_win(win->env->wins, FERNFRACT))
+		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, FERNFRACT);
 	i = -1;
 	while (fract && win->env->init_table[++i].func)
 		if (!ft_strcmp(fract->title, win->env->init_table[i].key))

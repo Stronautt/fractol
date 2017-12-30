@@ -38,7 +38,7 @@ fill_julia(__global int *buff, double pivot_x, double pivot_y, double dx,
 	double3			z = (double3) 0;
 
 	z = (double3)(1.5 * (x - width / 2) / (0.5 * dx * width) + pivot_x,
-		(y - height / 2) / (0.5 * dx * height) + pivot_y, 0);
+		0.85 * (y - height / 2) / (0.5 * dx * height) + pivot_y, 0);
 	it = MAX_ITERATIONS + 1;
 	while ((z.x * z.x + z.y * z.y) <= 4.0 && --it > 1)
 	{

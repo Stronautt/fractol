@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 14:18:23 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 16:24:52 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define BURNINGSHIP "BurningShip"
 # define JULIAFRACT "Julia Set"
 # define TRICORNFRACT "Tricorn Set"
+# define FERNFRACT "Barnsley fern fractal"
 
 # define K_MF "./kernel/mandelfract.cl"
 # define F_MF "fill_mandelfract"
@@ -287,6 +288,17 @@ void			ft_tricornhelp(t_window *win);
 void			ft_init_tricornfract(t_window *win);
 
 void			ft_tricornfract(t_window *win);
+
+/*
+**		Bernsleyfern_fract.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+void			ft_fernhelp(t_window *win);
+
+void			ft_init_fernfract(t_window *win);
+
+void			ft_fernfract(t_window *win);
 
 /*
 **		Color_helper.c
