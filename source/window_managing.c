@@ -6,13 +6,13 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:18:42 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:27:55 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 11:13:58 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	init_data(t_env *env, t_window *w)
+static void			init_data(t_env *env, t_window *w)
 {
 	int		i;
 
@@ -31,7 +31,7 @@ static void	init_data(t_env *env, t_window *w)
 			env->dpndc[i].kernel_name, env->dpndc[i].func_name);
 }
 
-t_window	*ft_new_win(t_env *env, int width, int height, char *title)
+t_window			*ft_new_win(t_env *env, int width, int height, char *title)
 {
 	t_window	*new;
 
@@ -55,7 +55,7 @@ t_window	*ft_new_win(t_env *env, int width, int height, char *title)
 	return (env->wins->next = new);
 }
 
-t_window	*ft_get_win(t_window *wins, const char *title)
+t_window			*ft_get_win(t_window *wins, const char *title)
 {
 	t_window	*win;
 
@@ -66,12 +66,12 @@ t_window	*ft_get_win(t_window *wins, const char *title)
 	return (NULL);
 }
 
-int			ft_destroy_win(t_window *win)
+int					ft_destroy_win(t_window *win)
 {
 	win->next->prev = win->prev;
 	win->prev->next = win->next;
 	!ft_strcmp(win->title, PROGRAM_NAME) ? exit(0) : 0;
-	mlx_destroy_window(win->env->mlx_p, win->win_p);
+	win->safe_m ? mlx_destroy_window(win->env->mlx_p, win->win_p) : 0;
 	mlx_destroy_image(win->env->mlx_p, win->pixels.p);
 	clReleaseMemObject(win->cl_data.mem);
 	clReleaseProgram(win->cl_data.program);

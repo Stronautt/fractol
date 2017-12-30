@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:54:06 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 11:14:08 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define MW_WIDTH 800
 # define MW_HEIGHT 600
 
-# define FW_WIDTH 2560
-# define FW_HEIGHT 1310
+# define FW_WIDTH 600
+# define FW_HEIGHT 600
 
 # ifndef ONE_OVER_LOG2
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
@@ -159,6 +159,7 @@ typedef struct	s_window
 	t_vertice		pivot;
 	struct s_env	*env;
 	t_cl			cl_data;
+	char			safe_m;
 	struct s_window	*next;
 }				t_window;
 
@@ -220,7 +221,7 @@ int				ft_destroy_win(t_window *win);
 
 void			ft_set_background(t_window *win, t_uint color);
 
-void			ft_draw(t_env env, t_window *win);
+int				ft_draw(t_env env, t_window *win);
 
 /*
 **		Menu.c

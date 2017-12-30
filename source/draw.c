@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:12:26 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 15:59:03 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 11:06:25 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		ft_print_debug(t_env env, t_window *win)
 	mlx_string_put(env.mlx_p, win->win_p, 10, 50, 0x00FF00, buff);
 }
 
-void		ft_draw(t_env env, t_window *win)
+int			ft_draw(t_env env, t_window *win)
 {
 	int		i;
 
@@ -54,4 +54,5 @@ void		ft_draw(t_env env, t_window *win)
 	if (env.dpndc[i].kernel_name)
 		mlx_put_image_to_window(env.mlx_p, win->win_p, win->pixels.p, 0, 0);
 	ft_print_debug(env, win);
+	return (0);
 }
