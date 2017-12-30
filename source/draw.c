@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:12:26 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 11:51:08 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:16:24 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		ft_set_background(t_window *win, t_uint color)
 	i = -4;
 	while ((i += 4) < limit)
 		ft_memcpy(&win->pixels.buff[i], &color, 4);
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, win->pixels.p, 0, 0);
 }
 
 void		ft_print_debug(t_env env, t_window *win)

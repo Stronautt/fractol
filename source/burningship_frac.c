@@ -6,17 +6,31 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 17:07:51 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 12:57:36 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:37:49 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+void	ft_burninghelp(t_window *win)
+{
+	mlx_string_put(win->env->mlx_p, win->win_p, 100, 105,
+					0x8C8C, "BurningShip Set HELP");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 165,
+					0, "- You can zoom this set, controls: ");
+	mlx_string_put(win->env->mlx_p, win->win_p, 40, 185,
+					0xAC, "SCROLL_UP to zoom in, SCROLL_DOWN - otherwise.");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 215,
+					0, "- You can move this set, controls: ");
+	mlx_string_put(win->env->mlx_p, win->win_p, 40, 235,
+					0x8C, "ARROW KEYS");
+}
+
 void	ft_init_buringship(t_window *win)
 {
-	win->pivot.x = -0.75;
-	win->pivot.y = 0.0;
-	win->dx = 0.003;
+	win->pivot.x = -0.5;
+	win->pivot.y = -0.5;
+	win->dx = 0.0017;
 	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
 	mlx_mouse_hook(win->win_p, &ft_mouse_handler, win);
 }

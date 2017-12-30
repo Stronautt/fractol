@@ -6,11 +6,25 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 19:41:20 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 12:57:50 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:37:29 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	ft_tricornhelp(t_window *win)
+{
+	mlx_string_put(win->env->mlx_p, win->win_p, 100, 105,
+					0x8C8C, "Tricorn Set HELP");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 165,
+					0, "- You can zoom this set, controls: ");
+	mlx_string_put(win->env->mlx_p, win->win_p, 40, 185,
+					0xAC, "SCROLL_UP to zoom in, SCROLL_DOWN - otherwise.");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 215,
+					0, "- You can move this set, controls: ");
+	mlx_string_put(win->env->mlx_p, win->win_p, 40, 235,
+					0x8C, "ARROW KEYS");
+}
 
 void	ft_init_tricornfract(t_window *win)
 {

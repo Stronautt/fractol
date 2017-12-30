@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 13:07:29 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 14:18:23 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "libft.h"
 
 # define PROGRAM_NAME "Fracto'l"
+# define HELP "Help"
 # define MANDELFRACT "Mandelbrot Set"
 # define BURNINGSHIP "BurningShip"
 # define JULIAFRACT "Julia Set"
@@ -45,6 +46,9 @@
 
 # define MAX_SOURCE_SIZE 0x400000
 
+# define HW_WIDTH 600
+# define HW_HEIGHT 400
+
 # define MW_WIDTH 800
 # define MW_HEIGHT 600
 
@@ -55,6 +59,7 @@
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
 # endif
 
+# define KEY_TAB 48
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -180,6 +185,7 @@ typedef struct	s_env
 	t_window	*wins;
 	t_dpndc		*dpndc;
 	t_dpndc		*init_table;
+	t_dpndc		*help_table;
 	t_cl		cl_data;
 }				t_env;
 
@@ -243,6 +249,8 @@ void			ft_menu(t_window *win);
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
+void			ft_mandelhelp(t_window *win);
+
 void			ft_init_mandelfract(t_window *win);
 
 void			ft_mandelfract(t_window *win);
@@ -251,6 +259,8 @@ void			ft_mandelfract(t_window *win);
 **		Burningship_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
+
+void			ft_burninghelp(t_window *win);
 
 void			ft_init_buringship(t_window *win);
 
@@ -261,6 +271,8 @@ void			ft_burningshipfract(t_window *win);
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
+void			ft_juliahelp(t_window *win);
+
 void			ft_init_julia(t_window *win);
 
 void			ft_julia(t_window *win);
@@ -269,6 +281,8 @@ void			ft_julia(t_window *win);
 **		Tricorn_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
+
+void			ft_tricornhelp(t_window *win);
 
 void			ft_init_tricornfract(t_window *win);
 
@@ -305,5 +319,13 @@ void			ft_parse_kernel(t_env *env, t_window *win,
 */
 
 double			ft_lerp(double a, double b, double t);
+
+void			ft_open_help(t_window *win);
+
+void			ft_make_help_dependecies(t_env *env);
+
+void			ft_make_draw_dependencies(t_env *env);
+
+void			ft_make_environment(t_env *env);
 
 #endif
