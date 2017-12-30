@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 16:24:52 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 19:16:06 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
 # endif
 
+# define KEY_PLUS 69
+# define KEY_MINUS 78
 # define KEY_TAB 48
 # define KEY_W 13
 # define KEY_A 0

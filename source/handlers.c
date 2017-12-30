@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:21:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 16:29:36 by pgritsen         ###   ########.fr       */
+/*   Updated: 2017/12/30 19:26:30 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int		ft_key_handler(int key, t_window *win)
 		key == KEY_ARR_LEFT && ++e ? win->pivot.x -= 0.06 / win->dx : 0;
 	}
 	key == KEY_ESC && (win->safe_m = 1) ? ft_destroy_win(win) : 0;
+	key == KEY_PLUS && win->c.z < 120 && ++e ? win->c.z += win->c.z / 18 : 0;
+	key == KEY_MINUS && win->c.z > 20 && ++e ? win->c.z -= win->c.z / 18 : 0;
 	!e && key == KEY_Q && !win->intra_m && ++e ? win->intra_m = 1 : 0;
 	!e && key == KEY_Q && win->intra_m && ++e ? win->intra_m = 0 : 0;
 	key == KEY_TAB ? ft_open_help(win) : 0;
