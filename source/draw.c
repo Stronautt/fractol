@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:12:26 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 16:59:04 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 14:40:28 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,26 @@ void		ft_print_debug(t_env env, t_window *win)
 	mlx_string_put(env.mlx_p, win->win_p, 10, 70, 0x00FF00, buff);
 	sprintf(buff, "CY:   %a", win->c.y);
 	mlx_string_put(env.mlx_p, win->win_p, 10, 90, 0x00FF00, buff);
+}
+
+void		ft_draw_line(t_window *win, t_vertice p0, t_vertice p1, int color)
+{
+	t_vertice	tmp;
+	int			pix;
+	double		t;
+	double		k;
+
+	k = sqrt((p0.x - p1.x) * (p0.x - p1.x) + (p0.y - p1.y) * (p0.y - p1.y));
+	k = 1.0 / k;
+	t = -k;
+	while ((t += k) <= 1)
+	{
+		tmp.x = p0.x + (p1.x - p0.x) * t;
+		tmp.y = p0.y + (p1.y - p0.y) * t;
+		pix = (int)(tmp.y) * win->pixels.s_l + (int)(tmp.x) * 4;
+		if (pix <= win->pixels.s_l * win->height)
+			ft_memcpy(&win->pixels.buff[pix], &color, 4);
+	}
 }
 
 int			ft_draw(t_env env, t_window *win)

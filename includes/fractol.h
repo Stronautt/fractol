@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 19:16:06 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 16:02:42 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define JULIAFRACT "Julia Set"
 # define TRICORNFRACT "Tricorn Set"
 # define FERNFRACT "Barnsley fern fractal"
+# define PYTHTREEFRACT "Pythagoras free fractal"
 
 # define K_MF "./kernel/mandelfract.cl"
 # define F_MF "fill_mandelfract"
@@ -220,6 +221,8 @@ int				ft_mouse_jf_handler(int key, int x, int y, t_window *win);
 
 int				ft_mouse_move_handler(int x, int y, t_window *win);
 
+t_window		*ft_button_actions(int key, int x, int y, t_window *win);
+
 /*
 **		Window_managing.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -238,7 +241,25 @@ int				ft_destroy_win(t_window *win);
 
 void			ft_set_background(t_window *win, t_uint color);
 
+void			ft_draw_line(t_window *win, t_vertice p0,
+								t_vertice p1, int color);
+
 int				ft_draw(t_env env, t_window *win);
+
+/*
+**		Color_helper.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+t_uchar			ft_get_alpha(intmax_t c);
+
+t_uchar			ft_get_red(intmax_t c);
+
+t_uchar			ft_get_green(intmax_t c);
+
+t_uchar			ft_get_blue(intmax_t c);
+
+intmax_t		ft_g_color(intmax_t c1, intmax_t c2, double k);
 
 /*
 **		Menu.c
@@ -292,7 +313,7 @@ void			ft_init_tricornfract(t_window *win);
 void			ft_tricornfract(t_window *win);
 
 /*
-**		Bernsleyfern_fract.c
+**		BernsleyFern_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
@@ -301,6 +322,17 @@ void			ft_fernhelp(t_window *win);
 void			ft_init_fernfract(t_window *win);
 
 void			ft_fernfract(t_window *win);
+
+/*
+**		PythagorasTree_fract.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+void			ft_pythtreehelp(t_window *win);
+
+void			ft_init_pythtree(t_window *win);
+
+void			ft_pythtreefract(t_window *win);
 
 /*
 **		Color_helper.c
