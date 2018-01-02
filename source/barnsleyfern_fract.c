@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 16:17:15 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 13:44:39 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:08:40 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void					ft_init_fernfract(t_window *win)
 	win->pivot.y = 0.0;
 	win->dx = 1000000.0;
 	win->c.z = 20;
-	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
+	mlx_hook(win->win_p, 2, 0, &ft_key_geom_handler, win);
 }
 
 inline static t_vertice	ft_distribute(int dt, t_vertice p0)

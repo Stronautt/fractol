@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:12:26 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 14:40:28 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 19:56:58 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		ft_draw_line(t_window *win, t_vertice p0, t_vertice p1, int color)
 		tmp.x = p0.x + (p1.x - p0.x) * t;
 		tmp.y = p0.y + (p1.y - p0.y) * t;
 		pix = (int)(tmp.y) * win->pixels.s_l + (int)(tmp.x) * 4;
-		if (pix <= win->pixels.s_l * win->height)
+		if (pix <= win->pixels.s_l * win->height && pix >= 0)
 			ft_memcpy(&win->pixels.buff[pix], &color, 4);
 	}
 }

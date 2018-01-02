@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 18:46:54 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 15:54:36 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:12:44 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void		ft_make_help_dependecies(t_env *env)
 		{TRICORNFRACT, &ft_tricornhelp, NULL, NULL},
 		{FERNFRACT, &ft_fernhelp, NULL, NULL},
 		{PYTHTREEFRACT, &ft_pythtreehelp, NULL, NULL},
+		{FRACTTREE, &ft_fracttreehelp, NULL, NULL},
 		{NULL, NULL, NULL, NULL}};
 
 	!(env->help_table = malloc(sizeof(help_table))) ?
@@ -60,22 +61,22 @@ void		ft_make_help_dependecies(t_env *env)
 
 void		ft_make_draw_dependencies(t_env *env)
 {
-	const t_dpndc	dpndc[] = {
-		{PROGRAM_NAME, &ft_menu, NULL, NULL},
+	const t_dpndc	dpndc[] = {{PROGRAM_NAME, &ft_menu, 0, 0},
 		{MANDELFRACT, &ft_mandelfract, F_MF, K_MF},
 		{BURNINGSHIP, &ft_burningshipfract, F_BS, K_BS},
 		{JULIAFRACT, &ft_julia, F_JF, K_JF},
 		{TRICORNFRACT, &ft_tricornfract, F_TF, K_TF},
-		{FERNFRACT, &ft_fernfract, NULL, NULL},
-		{PYTHTREEFRACT, &ft_pythtreefract, NULL, NULL},
+		{FERNFRACT, &ft_fernfract, 0, 0},
+		{PYTHTREEFRACT, &ft_pythtreefract, 0, 0},
+		{FRACTTREE, &ft_fracttree, 0, 0},
 		{NULL, NULL, NULL, NULL}};
-	const t_dpndc	init_table[] = {
-		{MANDELFRACT, &ft_init_mandelfract, NULL, NULL},
-		{BURNINGSHIP, &ft_init_buringship, NULL, NULL},
-		{JULIAFRACT, &ft_init_julia, NULL, NULL},
-		{TRICORNFRACT, &ft_init_tricornfract, NULL, NULL},
-		{FERNFRACT, &ft_init_fernfract, NULL, NULL},
-		{PYTHTREEFRACT, &ft_init_pythtree, NULL, NULL},
+	const t_dpndc	init_table[] = {{MANDELFRACT, &ft_init_mandelfract, 0, 0},
+		{BURNINGSHIP, &ft_init_buringship, 0, 0},
+		{JULIAFRACT, &ft_init_julia, 0, 0},
+		{TRICORNFRACT, &ft_init_tricornfract, 0, 0},
+		{FERNFRACT, &ft_init_fernfract, 0, 0},
+		{PYTHTREEFRACT, &ft_init_pythtree, 0, 0},
+		{FRACTTREE, &ft_init_fracttree, 0, 0},
 		{NULL, NULL, NULL, NULL}};
 
 	!(env->dpndc = malloc(sizeof(dpndc))) ?

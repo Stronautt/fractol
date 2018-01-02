@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 16:02:42 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:00:36 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # define JULIAFRACT "Julia Set"
 # define TRICORNFRACT "Tricorn Set"
 # define FERNFRACT "Barnsley fern fractal"
-# define PYTHTREEFRACT "Pythagoras free fractal"
+# define PYTHTREEFRACT "Pythagoras tree fractal"
+# define FRACTTREE "Fractal tree"
 
 # define K_MF "./kernel/mandelfract.cl"
 # define F_MF "fill_mandelfract"
@@ -223,6 +224,8 @@ int				ft_mouse_move_handler(int x, int y, t_window *win);
 
 t_window		*ft_button_actions(int key, int x, int y, t_window *win);
 
+int				ft_key_geom_handler(int key, t_window *win);
+
 /*
 **		Window_managing.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
@@ -333,6 +336,17 @@ void			ft_pythtreehelp(t_window *win);
 void			ft_init_pythtree(t_window *win);
 
 void			ft_pythtreefract(t_window *win);
+
+/*
+**		Fractal_tree.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+void			ft_fracttreehelp(t_window *win);
+
+void			ft_init_fracttree(t_window *win);
+
+void			ft_fracttree(t_window *win);
 
 /*
 **		Color_helper.c

@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:24:03 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 14:14:52 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:56:43 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static inline void	left_buttons(t_window *win, void *button)
 	mlx_string_put(win->env->mlx_p, win->win_p, 540, 308, 0, "BarnsleyFern");
 	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 450, 360);
 	mlx_string_put(win->env->mlx_p, win->win_p, 535, 378, 0, "PythagorasTree");
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 450, 430);
+	mlx_string_put(win->env->mlx_p, win->win_p, 540, 448, 0, "Fractal Tree");
 }
 
 void				ft_menu(t_window *win)
@@ -45,7 +47,8 @@ void				ft_menu(t_window *win)
 	!button || !logo ? ft_err_handler("Can't find resource!", NULL, 0) : 0;
 	mlx_put_image_to_window(win->env->mlx_p, win->win_p, logo, 50, 50);
 	mlx_string_put(win->env->mlx_p, win->win_p, 635, 225, 0, "By pgritsen");
-	mlx_string_put(win->env->mlx_p, win->win_p, 50, 570, 0, "HELP: TAB");
+	mlx_string_put(win->env->mlx_p, win->win_p, 50, 570, 0, "HELP: 'TAB'");
+	mlx_string_put(win->env->mlx_p, win->win_p, 640, 570, 0, "'ESC' :EXIT");
 	right_buttons(win, button);
 	left_buttons(win, button);
 }
