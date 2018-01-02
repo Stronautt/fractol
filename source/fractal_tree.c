@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 17:51:59 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 20:11:24 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:31:09 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void			ft_fracttreehelp(t_window *win)
 					0, "- You can grow this tree, controls: ");
 	mlx_string_put(win->env->mlx_p, win->win_p, 40, 235,
 					0xAC, "SCROLL_UP to grow up, SCROLL_DOWN - otherwise.");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 275, 0x8C, "ESC");
-	mlx_string_put(win->env->mlx_p, win->win_p, 60, 275, 0, "- to close.");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 265,
+					0, "- You can shrink this tree, controls: ");
+	mlx_string_put(win->env->mlx_p, win->win_p, 40, 285,
+				0xAC, "LEFT_ARROW to shrink wide, RIGHT_ARROW - otherwise.");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 355, 0x8C, "ESC");
+	mlx_string_put(win->env->mlx_p, win->win_p, 60, 355, 0, "- to close.");
 }
 
 void			ft_init_fracttree(t_window *win)
@@ -47,8 +51,8 @@ static void		ft_fractrecurs(t_vertice start, int angle,
 	angle_rad = ft_degtorad(angle);
 	if (iter > 0)
 	{
-		c.x = start.x + cos(angle_rad) * iter * win->c.z / 10.0;
-		c.y = start.y + sin(angle_rad) * iter * win->c.z / 10.0;
+		c.x = start.x + cos(angle_rad) * iter / floor(win->dx) * win->c.z;
+		c.y = start.y + sin(angle_rad) * iter / floor(win->dx) * win->c.z;
 		color = ft_g_color(0xFF00, 0x8B4513, iter / floor(win->dx));
 		ft_draw_line(win, start, c, color);
 		ft_fractrecurs(c, angle + win->c.color, iter - 1, win);
@@ -59,7 +63,7 @@ static void		ft_fractrecurs(t_vertice start, int angle,
 void			ft_fracttree(t_window *win)
 {
 	win->pivot.x = win->width / 2;
-	win->pivot.y = win->height - 140;
+	win->pivot.y = win->height - 400;
 	win->dx > 16 ? win->dx = 16 : 0;
 	win->dx <= 1 ? win->dx = 1 : 0;
 	ft_fractrecurs(win->pivot, -90, win->dx, win);

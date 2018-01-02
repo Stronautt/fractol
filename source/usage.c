@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 18:46:54 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 20:12:44 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:20:03 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		ft_make_draw_dependencies(t_env *env)
 		{FERNFRACT, &ft_fernfract, 0, 0},
 		{PYTHTREEFRACT, &ft_pythtreefract, 0, 0},
 		{FRACTTREE, &ft_fracttree, 0, 0},
-		{NULL, NULL, NULL, NULL}};
+		{0, 0, 0, 0}};
 	const t_dpndc	init_table[] = {{MANDELFRACT, &ft_init_mandelfract, 0, 0},
 		{BURNINGSHIP, &ft_init_buringship, 0, 0},
 		{JULIAFRACT, &ft_init_julia, 0, 0},
@@ -77,7 +77,7 @@ void		ft_make_draw_dependencies(t_env *env)
 		{FERNFRACT, &ft_init_fernfract, 0, 0},
 		{PYTHTREEFRACT, &ft_init_pythtree, 0, 0},
 		{FRACTTREE, &ft_init_fracttree, 0, 0},
-		{NULL, NULL, NULL, NULL}};
+		{0, 0, 0, 0}};
 
 	!(env->dpndc = malloc(sizeof(dpndc))) ?
 								ft_err_handler("Memmory fail!", NULL, 0) : 0;

@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 16:17:15 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 20:08:40 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:32:05 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void					ft_fernhelp(t_window *win)
 					0, "- You can grow this fern, controls: ");
 	mlx_string_put(win->env->mlx_p, win->win_p, 40, 185,
 					0xAC, "'+' to grow up, '-' - otherwise.");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 275, 0x8C, "ESC");
-	mlx_string_put(win->env->mlx_p, win->win_p, 60, 275, 0, "- to close.");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 355, 0x8C, "ESC");
+	mlx_string_put(win->env->mlx_p, win->win_p, 60, 355, 0, "- to close.");
 }
 
 void					ft_init_fernfract(t_window *win)

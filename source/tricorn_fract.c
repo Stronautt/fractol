@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 19:41:20 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/30 15:40:47 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 20:32:23 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_tricornhelp(t_window *win)
 					0, "- You can move this set, controls: ");
 	mlx_string_put(win->env->mlx_p, win->win_p, 40, 235,
 					0x8C, "ARROW KEYS");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 275, 0x8C, "ESC");
-	mlx_string_put(win->env->mlx_p, win->win_p, 60, 275, 0, "- to close.");
+	mlx_string_put(win->env->mlx_p, win->win_p, 20, 355, 0x8C, "ESC");
+	mlx_string_put(win->env->mlx_p, win->win_p, 60, 355, 0, "- to close.");
 }
 
 void	ft_init_tricornfract(t_window *win)
