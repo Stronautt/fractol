@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:21:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 20:08:56 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 21:43:54 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ int		ft_menu_mouse_handler(int key, int x, int y, t_window *win)
 	else if (key == M_B_LEFT && x >= 50 && x <= 350 && y >= 500 && y <= 563
 		&& !ft_get_win(win->env->wins, JULIAFRACT))
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, JULIAFRACT);
-	else if (key == M_B_LEFT && x >= 450 && x <= 750 && y >= 290 && y <= 353
-		&& !ft_get_win(win->env->wins, FERNFRACT))
-		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, FERNFRACT);
 	else
 		fract = ft_button_actions(key, x, y, win);
 	i = -1;

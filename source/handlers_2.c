@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 13:07:45 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 20:11:36 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 21:24:27 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,18 @@ t_window	*ft_button_actions(int key, int x, int y, t_window *win)
 	t_window	*fract;
 
 	fract = NULL;
-	if (key == M_B_LEFT && x >= 450 && x <= 750 && y >= 360 && y <= 423
+	if (key == M_B_LEFT && x >= 450 && x <= 750 && y >= 290 && y <= 353
+		&& !ft_get_win(win->env->wins, FERNFRACT))
+		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, FERNFRACT);
+	else if (key == M_B_LEFT && x >= 450 && x <= 750 && y >= 360 && y <= 423
 		&& !ft_get_win(win->env->wins, PYTHTREEFRACT))
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, PYTHTREEFRACT);
 	else if (key == M_B_LEFT && x >= 450 && x <= 750 && y >= 430 && y <= 493
 		&& !ft_get_win(win->env->wins, FRACTTREE))
 		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, FRACTTREE);
+	else if (key == M_B_LEFT && x >= 450 && x <= 750 && y >= 500 && y <= 563
+		&& !ft_get_win(win->env->wins, SIERPINSKI))
+		fract = ft_new_win(win->env, FW_WIDTH, FW_HEIGHT, SIERPINSKI);
 	return (fract);
 }
 

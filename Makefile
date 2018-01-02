@@ -6,7 +6,7 @@
 #    By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/10 17:05:19 by pgritsen          #+#    #+#              #
-#    Updated: 2018/01/02 17:53:39 by pgritsen         ###   ########.fr        #
+#    Updated: 2018/01/02 21:22:30 by pgritsen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCSDIR		=	source
 SRCS		=	main.c handlers.c window_managing.c draw.c mandelbrot_fract.c	\
 				burningship_frac.c opencl.c usage.c menu.c julia_fract.c		\
 				tricorn_fract.c handlers_2.c barnsleyfern_fract.c				\
-				pythagorastree_fract.c color_helper.c fractal_tree.c
+				pythagorastree_fract.c color_helper.c fractal_tree.c			\
+				sierpinski_fract.c
 
 OBJDIR		=	obj
 

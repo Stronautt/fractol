@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/18 22:04:33 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 20:00:36 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 21:21:32 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define FERNFRACT "Barnsley fern fractal"
 # define PYTHTREEFRACT "Pythagoras tree fractal"
 # define FRACTTREE "Fractal tree"
+# define SIERPINSKI "Sierpinski triangle fractal"
 
 # define K_MF "./kernel/mandelfract.cl"
 # define F_MF "fill_mandelfract"
@@ -347,6 +348,17 @@ void			ft_fracttreehelp(t_window *win);
 void			ft_init_fracttree(t_window *win);
 
 void			ft_fracttree(t_window *win);
+
+/*
+**		Sierpinski_fract.c
+**		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+*/
+
+void			ft_sierpinskihelp(t_window *win);
+
+void			ft_init_sierpinski(t_window *win);
+
+void			ft_sierpinski(t_window *win);
 
 /*
 **		Color_helper.c

@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:24:03 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/01/02 17:56:43 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/02 21:25:19 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static inline void	left_buttons(t_window *win, void *button)
 	mlx_string_put(win->env->mlx_p, win->win_p, 535, 378, 0, "PythagorasTree");
 	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 450, 430);
 	mlx_string_put(win->env->mlx_p, win->win_p, 540, 448, 0, "Fractal Tree");
+	mlx_put_image_to_window(win->env->mlx_p, win->win_p, button, 450, 500);
+	mlx_string_put(win->env->mlx_p, win->win_p, 550, 518, 0, "Sierpinski");
 }
 
 void				ft_menu(t_window *win)
