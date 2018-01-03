@@ -9,3 +9,5 @@
 ## Install:
 1. `make`
 2. `./fractol`
+
+###### 🍏 Works only on Mac OS
