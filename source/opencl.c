@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 21:20:01 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/29 19:17:01 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/01/03 15:21:47 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_init_cl(t_env *env, cl_device_type dev_type)
 	cl_int	err;
 
 	err = clGetDeviceIDs(NULL, dev_type, 1, &env->cl_data.device, NULL);
+	err ? clGetDeviceIDs(NULL, CL_DEVICE_TYPE_DEFAULT,
+			1, &env->cl_data.device, NULL) : 0;
 	err ? ft_err_handler("OpenCl", "Can't get device!", 0) : 0;
 	env->cl_data.context = clCreateContext(0, 1, &env->cl_data.device,
 											NULL, NULL, &err);
