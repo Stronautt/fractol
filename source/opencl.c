@@ -17,7 +17,7 @@ void	ft_init_cl(t_env *env, cl_device_type dev_type)
 	cl_int	err;
 
 	err = clGetDeviceIDs(NULL, dev_type, 1, &env->cl_data.device, NULL);
-	err ? clGetDeviceIDs(NULL, CL_DEVICE_TYPE_DEFAULT,
+	err ? err = clGetDeviceIDs(NULL, CL_DEVICE_TYPE_DEFAULT,
 			1, &env->cl_data.device, NULL) : 0;
 	err ? ft_err_handler("OpenCl", "Can't get device!", 0) : 0;
 	env->cl_data.context = clCreateContext(0, 1, &env->cl_data.device,
