@@ -14,7 +14,7 @@ NAME		= 	libft.a
 
 CC			= 	gcc
 
-CFLAGS		= 	-Wextra -Werror -Wall -O3 -g3
+CFLAGS		= 	-Wextra -Wall -O3 -g3
 
 SRCS		= 	ft_lstnew.c ft_strcat.c ft_strncpy.c ft_memalloc.c ft_strchr.c		\
 				ft_strnequ.c ft_memccpy.c ft_strclr.c ft_strnew.c ft_atoi.c			\

@@ -14,7 +14,7 @@ NAME		=	fractol
 
 CC			=	gcc
 
-CFLAGS		=	-Wextra -Werror -Wall -O3 -g3
+CFLAGS		=	-Wextra -Wall -O3 -g3
 
 HDRSDIR		=	includes
 
@@ -32,10 +32,9 @@ OBJDIR		=	obj
 
 OBJ			=	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-LIBS		=	libft/libft.a minilibx_macos/libmlx.a
+LIBS		=	libft/libft.a minilibx/libmlx.a
 
-INCLUDES	=	-Ilibft -Iminilibx_macos -Llibft -Lminilibx_macos -lft -lmlx	\
-				-framework OpenGL -framework AppKit -framework OpenCl
+INCLUDES	=	-Ilibft -Iminilibx -Llibft -Lminilibx -lft -lmlx -lXext -lX11 -lcl -lbsd -lm
 
 all: lib $(NAME)
 
@@ -51,7 +50,7 @@ $(OBJDIR):
 
 $(OBJ): $(OBJDIR)/%.o : $(SRCSDIR)/%.c
 	@printf "\033[32m[Compiling $<].......\033[0m"
-	@$(CC) $(CFLAGS) -Ilibft -Iminilibx_macos -c $< -o $@ -I$(HDRSDIR)
+	@$(CC) $(CFLAGS) -Ilibft -Iminilibx -c $< -o $@ -I$(HDRSDIR)
 	@printf "\033[32m[DONE]\033[0m\n"
 
 $(LIBS): lib
@@ -61,12 +60,12 @@ lib:
 	@make -j3 -C libft
 	@printf "\033[33m[Creating libft.a].......[END]\033[0m\n"
 	@printf "\n\033[33m[Creating libmlx.a].......[START]\033[0m\n"
-	@make -j3 -C minilibx_macos
+	@make -j3 -C minilibx
 	@printf "\033[33m[Creating libmlx.a].......[END]\033[0m\n"
 
 clean:
 	@make -j3 -C libft clean
-	@make -j3 -C minilibx_macos clean
+	@make -j3 -C minilibx clean
 	@printf "\033[31m[Cleaning object files].......\033[0m"
 	@rm -rf $(OBJDIR)
 	@printf "\033[31m[DONE]\033[0m\n"
@@ -76,7 +75,7 @@ clean_$(NAME):
 	@rm -rf $(OBJDIR)
 	@printf "\033[31m[DONE]\033[0m\n"
 
-fclean: clean	
+fclean: clean
 	@make -j3 -C libft fclean
 	@rm -rf $(NAME)
 	@printf "\033[31m[Cleaning All].......\033[0m"

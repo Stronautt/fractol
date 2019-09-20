@@ -22,7 +22,7 @@
 # include <time.h>
 # include <limits.h>
 # include <pthread.h>
-# include <OpenCL/opencl.h>
+# include <CL/cl.h>
 # include "libft.h"
 
 # define PROGRAM_NAME "Fracto'l"
@@ -56,8 +56,8 @@
 # define MW_WIDTH 800
 # define MW_HEIGHT 600
 
-# define FW_WIDTH 2560
-# define FW_HEIGHT 1440
+# define FW_WIDTH 1024
+# define FW_HEIGHT 824
 
 # ifndef ONE_OVER_LOG2
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
