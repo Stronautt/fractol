@@ -52,6 +52,5 @@ int			ft_key_geom_handler(int key, t_window *win)
 	key == KEY_MINUS && win->c.z > 20 && ++e ? win->c.z -= win->c.z / 18 : 0;
 	key == KEY_ARR_LEFT && win->c.color > 2 && ++e ? win->c.color-- : 0;
 	key == KEY_ARR_RIGHT && win->c.color < 30 && ++e ? win->c.color++ : 0;
-	key == KEY_TAB ? ft_open_help(win) : 0;
-	return (e && ft_strcmp(win->title, HELP) ? ft_draw(*win->env, win) : 0);
+	return (e ? ft_draw(*win->env, win) : 0);
 }

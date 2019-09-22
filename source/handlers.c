@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-void	ft_err_handler(char *msg, char *add, int err)
+void	ft_err_handler(char *msg, const char *add, int err)
 {
 	if (!msg)
 		exit(-1);
@@ -76,8 +76,7 @@ int		ft_key_handler(int key, t_window *win)
 	key == KEY_ESC && (win->safe_m = 1) ? ft_destroy_win(win) : 0;
 	!e && key == KEY_Q && !win->intra_m && ++e ? win->intra_m = 1 : 0;
 	!e && key == KEY_Q && win->intra_m && ++e ? win->intra_m = 0 : 0;
-	key == KEY_TAB ? ft_open_help(win) : 0;
-	return (e && ft_strcmp(win->title, HELP) ? ft_draw(*win->env, win) : 0);
+	return (e ? ft_draw(*win->env, win) : 0);
 }
 
 int		ft_mouse_handler(int key, int x, int y, t_window *win)

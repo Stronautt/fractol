@@ -12,26 +12,6 @@
 
 #include "fractol.h"
 
-void	ft_juliahelp(t_window *win)
-{
-	mlx_string_put(win->env->mlx_p, win->win_p, 100, 105,
-					0x8C8C, "Julia Set HELP");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 145,
-					0, "- You can zoom this set, controls: ");
-	mlx_string_put(win->env->mlx_p, win->win_p, 40, 165,
-					0xAC, "SCROLL_UP to zoom in, SCROLL_DOWN - otherwise.");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 195,
-					0, "- You can move this set, controls: ");
-	mlx_string_put(win->env->mlx_p, win->win_p, 40, 215,
-					0x8C, "ARROW KEYS");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 245,
-					0, "- You can activate interactive mode, controls: ");
-	mlx_string_put(win->env->mlx_p, win->win_p, 40, 265,
-					0x8C, "PRESS 'Q' to activate, and again to deactivate.");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 355, 0x8C, "ESC");
-	mlx_string_put(win->env->mlx_p, win->win_p, 60, 355, 0, "- to close.");
-}
-
 void	ft_init_julia(t_window *win)
 {
 	win->pivot.x = 0.0;
@@ -39,9 +19,9 @@ void	ft_init_julia(t_window *win)
 	win->dx = 0.85;
 	win->c.x = -0.7;
 	win->c.y = 0.27015;
-	mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
-	mlx_mouse_hook(win->win_p, &ft_mouse_jf_handler, win);
-	mlx_hook(win->win_p, 6, 0, &ft_mouse_move_handler, win);
+	// mlx_hook(win->win_p, 2, 0, &ft_key_handler, win);
+	// mlx_mouse_hook(win->win_p, &ft_mouse_jf_handler, win);
+	// mlx_hook(win->win_p, 6, 0, &ft_mouse_move_handler, win);
 }
 
 void	ft_julia(t_window *win)
@@ -68,6 +48,6 @@ void	ft_julia(t_window *win)
 		2, NULL, (size_t[3]){win->width, win->height, 0}, NULL, 0, NULL, NULL);
 	err ? ft_err_handler("OpenCL", "Fail!", 0) : 0;
 	err = clEnqueueReadBuffer(win->env->cl_data.queue, win->cl_data.mem,
-		CL_TRUE, 0, win->height * win->width * sizeof(t_uint), win->pixels.buff,
+		CL_TRUE, 0, win->height * win->width * sizeof(t_uint), win->surface->pixels,
 		0, NULL, NULL);
 }

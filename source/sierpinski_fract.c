@@ -12,23 +12,11 @@
 
 #include "fractol.h"
 
-void			ft_sierpinskihelp(t_window *win)
-{
-	mlx_string_put(win->env->mlx_p, win->win_p, 100, 105,
-					0x8C8C, "Sierpinski triangle fractal HELP");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 165,
-					0, "- You can scale this triangle, controls: ");
-	mlx_string_put(win->env->mlx_p, win->win_p, 40, 185,
-					0xAC, "SCROLL_UP to scale up, SCROLL_DOWN - otherwise.");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 355, 0x8C, "ESC");
-	mlx_string_put(win->env->mlx_p, win->win_p, 60, 355, 0, "- to close.");
-}
-
 void			ft_init_sierpinski(t_window *win)
 {
 	win->dx = 3;
-	mlx_hook(win->win_p, 2, 0, &ft_key_geom_handler, win);
-	mlx_mouse_hook(win->win_p, &ft_mouse_jf_handler, win);
+	// mlx_hook(win->win_p, 2, 0, &ft_key_geom_handler, win);
+	// mlx_mouse_hook(win->win_p, &ft_mouse_jf_handler, win);
 }
 
 static void		ft_sierpinskirecurs(t_vertice v[3], int it, t_window *win)

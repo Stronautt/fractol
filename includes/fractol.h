@@ -17,16 +17,15 @@
 # include <errno.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <mlx.h>
 # include <math.h>
 # include <time.h>
 # include <limits.h>
 # include <pthread.h>
+# include <SDL2/SDL.h>
 # include <CL/cl.h>
 # include "libft.h"
 
 # define PROGRAM_NAME "Fracto'l"
-# define HELP "Help"
 # define MANDELFRACT "Mandelbrot Set"
 # define BURNINGSHIP "BurningShip"
 # define JULIAFRACT "Julia Set"
@@ -62,6 +61,8 @@
 # ifndef ONE_OVER_LOG2
 #  define ONE_OVER_LOG2 1.0 / log(2.0)
 # endif
+
+# define EXIT_KEY SDLK_q
 
 # define KEY_PLUS 69
 # define KEY_MINUS 78
@@ -163,8 +164,8 @@ typedef struct	s_window
 	int				width;
 	int				height;
 	char			*title;
-	void			*win_p;
-	t_img			pixels;
+	SDL_Window		*win_p;
+	SDL_Surface		*surface;
 	double			dx;
 	t_vertice		c;
 	t_vertice		pivot;
@@ -191,7 +192,6 @@ typedef struct	s_env
 	t_window	*wins;
 	t_dpndc		*dpndc;
 	t_dpndc		*init_table;
-	t_dpndc		*help_table;
 	t_cl		cl_data;
 }				t_env;
 
@@ -206,7 +206,7 @@ typedef struct	s_thread_stuff
 **		↓↓↓↓↓↓↓↓↓↓
 */
 
-void			ft_err_handler(char *msg, char *add, int err);
+void			ft_err_handler(char *msg, const char *add, int err);
 
 int				ft_key_handler(int key, t_window *win);
 
@@ -266,18 +266,9 @@ t_uchar			ft_get_blue(intmax_t c);
 intmax_t		ft_g_color(intmax_t c1, intmax_t c2, double k);
 
 /*
-**		Menu.c
-**		↓↓↓↓↓↓
-*/
-
-void			ft_menu(t_window *win);
-
-/*
 **		Mandelbrot_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
-
-void			ft_mandelhelp(t_window *win);
 
 void			ft_init_mandelfract(t_window *win);
 
@@ -288,8 +279,6 @@ void			ft_mandelfract(t_window *win);
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
-void			ft_burninghelp(t_window *win);
-
 void			ft_init_buringship(t_window *win);
 
 void			ft_burningshipfract(t_window *win);
@@ -298,8 +287,6 @@ void			ft_burningshipfract(t_window *win);
 **		Julia_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
-
-void			ft_juliahelp(t_window *win);
 
 void			ft_init_julia(t_window *win);
 
@@ -310,8 +297,6 @@ void			ft_julia(t_window *win);
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
-void			ft_tricornhelp(t_window *win);
-
 void			ft_init_tricornfract(t_window *win);
 
 void			ft_tricornfract(t_window *win);
@@ -320,8 +305,6 @@ void			ft_tricornfract(t_window *win);
 **		BernsleyFern_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
-
-void			ft_fernhelp(t_window *win);
 
 void			ft_init_fernfract(t_window *win);
 
@@ -332,8 +315,6 @@ void			ft_fernfract(t_window *win);
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
-void			ft_pythtreehelp(t_window *win);
-
 void			ft_init_pythtree(t_window *win);
 
 void			ft_pythtreefract(t_window *win);
@@ -343,8 +324,6 @@ void			ft_pythtreefract(t_window *win);
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
 
-void			ft_fracttreehelp(t_window *win);
-
 void			ft_init_fracttree(t_window *win);
 
 void			ft_fracttree(t_window *win);
@@ -353,8 +332,6 @@ void			ft_fracttree(t_window *win);
 **		Sierpinski_fract.c
 **		↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 */
-
-void			ft_sierpinskihelp(t_window *win);
 
 void			ft_init_sierpinski(t_window *win);
 
@@ -391,10 +368,6 @@ void			ft_parse_kernel(t_env *env, t_window *win,
 */
 
 double			ft_lerp(double a, double b, double t);
-
-void			ft_open_help(t_window *win);
-
-void			ft_make_help_dependecies(t_env *env);
 
 void			ft_make_draw_dependencies(t_env *env);
 

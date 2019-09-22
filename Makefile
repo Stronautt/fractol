@@ -23,7 +23,7 @@ HDRS		=	$(addprefix $(HDRSDIR)/, fractol.h)
 SRCSDIR		=	source
 
 SRCS		=	main.c handlers.c window_managing.c draw.c mandelbrot_fract.c	\
-				burningship_frac.c opencl.c usage.c menu.c julia_fract.c		\
+				burningship_frac.c opencl.c usage.c julia_fract.c				\
 				tricorn_fract.c handlers_2.c barnsleyfern_fract.c				\
 				pythagorastree_fract.c color_helper.c fractal_tree.c			\
 				sierpinski_fract.c
@@ -32,9 +32,9 @@ OBJDIR		=	obj
 
 OBJ			=	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-LIBS		=	libft/libft.a minilibx/libmlx.a
+LIBS		=	libft/libft.a
 
-INCLUDES	=	-Ilibft -Iminilibx -Llibft -Lminilibx -lft -lmlx -lXext -lX11 -lcl -lbsd -lm
+INCLUDES	=	-Ilibft -Llibft `sdl2-config --libs` -lft -lcl -lm
 
 all: lib $(NAME)
 
@@ -59,13 +59,9 @@ lib:
 	@printf "\033[33m[Creating libft.a].......[START]\033[0m\n"
 	@make -j3 -C libft
 	@printf "\033[33m[Creating libft.a].......[END]\033[0m\n"
-	@printf "\n\033[33m[Creating libmlx.a].......[START]\033[0m\n"
-	@make -j3 -C minilibx
-	@printf "\033[33m[Creating libmlx.a].......[END]\033[0m\n"
 
 clean:
 	@make -j3 -C libft clean
-	@make -j3 -C minilibx clean
 	@printf "\033[31m[Cleaning object files].......\033[0m"
 	@rm -rf $(OBJDIR)
 	@printf "\033[31m[DONE]\033[0m\n"

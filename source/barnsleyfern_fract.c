@@ -12,25 +12,13 @@
 
 #include "fractol.h"
 
-void					ft_fernhelp(t_window *win)
-{
-	mlx_string_put(win->env->mlx_p, win->win_p, 100, 105,
-					0x8C8C, "Barnsley Fern Fractal HELP");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 165,
-					0, "- You can grow this fern, controls: ");
-	mlx_string_put(win->env->mlx_p, win->win_p, 40, 185,
-					0xAC, "'+' to grow up, '-' - otherwise.");
-	mlx_string_put(win->env->mlx_p, win->win_p, 20, 355, 0x8C, "ESC");
-	mlx_string_put(win->env->mlx_p, win->win_p, 60, 355, 0, "- to close.");
-}
-
 void					ft_init_fernfract(t_window *win)
 {
 	win->pivot.x = 0.0;
 	win->pivot.y = 0.0;
 	win->dx = 1000000.0;
 	win->c.z = 20;
-	mlx_hook(win->win_p, 2, 0, &ft_key_geom_handler, win);
+	// mlx_hook(win->win_p, 2, 0, &ft_key_geom_handler, win);
 }
 
 inline static t_vertice	ft_distribute(int dt, t_vertice p0)
@@ -65,10 +53,10 @@ void					ft_fernfract(t_window *win)
 	{
 		dt = rand() % 100;
 		p1 = ft_distribute(dt, p0);
-		pix = (int)(win->height - 135 - p1.y * win->c.z) * win->pixels.s_l\
+		pix = (int)(win->height - 135 - p1.y * win->c.z) * win->surface->pitch \
 				+ (int)(win->c.z * p1.x + win->width / 2) * 4 + 1;
 		if (pix <= win->width * win->height * 4 && pix >= 0)
-			win->pixels.buff[pix] = 0xFF;
+			((char *)win->surface->pixels)[pix] = 0xFF;
 		p0 = p1;
 	}
 }
